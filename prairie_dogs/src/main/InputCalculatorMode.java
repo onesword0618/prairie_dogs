@@ -1,11 +1,13 @@
 package main;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 計算モード選択
  * 
  * @author onesword0618
  */
-
 public class InputCalculatorMode {
 
 	/**
@@ -43,6 +45,14 @@ public class InputCalculatorMode {
 
 		System.out.println(rslt);
 
+		List<Integer> rsltList = new ArrayList<>();
+		
+		rsltList.add(rslt);
+		
+		CsvWriter csvWriter = new CsvWriter();
+		
+		csvWriter.init(rsltList);
+		
 		return rslt;
 	}
 }

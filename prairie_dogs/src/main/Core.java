@@ -17,7 +17,7 @@ public class Core {
 		int a = stdIn.nextInt();
 		System.out.println("第２引数を入力してください");
 		int b = stdIn.nextInt();
-
+		
 		InputCalculatorMode inputCalc = new InputCalculatorMode();
 
 		inputCalc.selectMode(inputMode, a, b);
