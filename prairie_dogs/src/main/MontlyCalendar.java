@@ -80,6 +80,7 @@ public class MontlyCalendar {
 		// 何曜日スタート設定
 		int column = startDay - 1;
 		for (int date = 1; date <= lastDay; date++) {
+			// 月末日分、表が増加
 			calendarMatrix[row][column] = date;
 			if (column == 6) {
 				row++;
