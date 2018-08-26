@@ -6,7 +6,8 @@ import java.util.Properties;
 
 public class ConfigWriter {
 	public static void main(String[] args) {
-
+		
+		// TODO ここの処理機能は再検討してからメイン機能へ統合する
 		try (FileOutputStream f = new FileOutputStream("conf.txt");
 				BufferedOutputStream outPut = new BufferedOutputStream(f)) {
 			Properties properties = new Properties();

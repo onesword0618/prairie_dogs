@@ -6,11 +6,17 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Properties;
 
+/**
+ * 設定ファイル読み込み処理
+ * 
+ * @author onesword0618
+ */
 public class ConfigReader {
 
+	// TOOD 全体の処理見直しでメイン機能に統合する
 	String userHome = System.getProperty("user.home").toString();
-	
-	private static final String INIT_FILE_PATH = "userHome + /bin/Sample.csv";
+
+	private static final String INIT_FILE_PATH = "userHome + /bin/computation.csv";
 	private static final Properties properties;
 
 	private ConfigReader() throws Exception {
@@ -19,8 +25,7 @@ public class ConfigReader {
 	static {
 		properties = new Properties();
 		try {
-			properties.load(Files.newBufferedReader(Paths.get(INIT_FILE_PATH), 
-					StandardCharsets.UTF_8));
+			properties.load(Files.newBufferedReader(Paths.get(INIT_FILE_PATH), StandardCharsets.UTF_8));
 		} catch (IOException e) {
 			// ファイル読み込みに失敗
 			System.out.println(String.format("ファイルの読み込みに失敗しました。ファイル名:%s", INIT_FILE_PATH));
