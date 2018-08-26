@@ -68,9 +68,10 @@ public class MontlyCalendar {
 
 		// 初日を取得
 		calendar.set(year, month - 1, 1);
-		startDay = calendar.get(calendar.DAY_OF_WEEK);
+		startDay = calendar.get(calendar.getFirstDayOfWeek());
 
 		// 月末日を取得
+		// TODO 処理方法は再検討中
 		calendar.add(calendar.MONTH, 1);
 		calendar.add(calendar.DATE, -1);
 		lastDay = calendar.get(calendar.DATE);
@@ -91,6 +92,9 @@ public class MontlyCalendar {
 		}
 	}
 
+	/**
+	 * カレンダー機能利用
+	 */
 	@Override
 	public String toString() {
 		StringBuffer sb = new StringBuffer();

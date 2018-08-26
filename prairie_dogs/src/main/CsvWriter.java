@@ -29,34 +29,36 @@ public class CsvWriter {
 	 * CSV出力処理
 	 * 
 	 * @param intList
-	 * @param strList
+	 * @param strList https://docs.oracle.com/javase/jp/10/docs/api/java/io/BufferedWriter.html
+	 * 
 	 */
 	public static void exportCsv(List<Integer> intList, String[] strList) {
 
+		// TODO この処理も検討してからメイン機能へ統合する
 		try {
 			// 出力場所を指定
 			// ユーザディレクトリを取得
 			String userHome = System.getProperty("user.home").toString();
-			
-			FileWriter f = new FileWriter(userHome + "/bin/Sample.csv", false);
-			PrintWriter p = new PrintWriter(new BufferedWriter(f));
+
+			FileWriter fileWriter = new FileWriter(userHome + "/bin/Sample.csv", false);
+			PrintWriter printWriter = new PrintWriter(new BufferedWriter(fileWriter));
 
 			// ヘッダーの指定
-			p.print("順番");
-			p.print(",");
-			p.print("名前");
-			p.println();
+			printWriter.print("順番");
+			printWriter.print(",");
+			printWriter.print("名前");
+			printWriter.println();
 
 			// 内容セット
 			for (int i = 0; i < intList.size(); i++) {
-				p.print(strList[i]);
-				p.print(",");
-				p.print(intList.get(i).intValue());
-				p.println();
+				printWriter.print(strList[i]);
+				printWriter.print(",");
+				printWriter.print(intList.get(i).intValue());
+				printWriter.println();
 			}
 
 			// ファイルクローズ
-			p.close();
+			printWriter.close();
 
 			System.out.println("Output CSV");
 

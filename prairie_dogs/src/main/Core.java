@@ -22,19 +22,29 @@ public class Core {
 		System.out.println("計算モードを選んでください");
 		System.out.println("0:加算 1:減算 2:乗算　3:除算");
 
+		/*
+		 * ★ライブラリ：java.util.Scanner
+		 * 
+		 * @see https://docs.oracle.com/javase/jp/10/docs/api/java/util/Scanner.html
+		 */
 		Scanner stdIn = new Scanner(System.in);
 
-		int inputMode = stdIn.nextInt();
+		// 入力モードを選択させる
+		int inputSelectMode = stdIn.nextInt();
 
+		/*
+		 * 計算値を投入する 小数は考慮しない 家計簿に小数って...?
+		 */
 		System.out.println("第１引数を入力してください");
-		int a = stdIn.nextInt();
+		int firstArgument = stdIn.nextInt();
 		System.out.println("第２引数を入力してください");
-		int b = stdIn.nextInt();
+		int secondArgument = stdIn.nextInt();
 
-		InputCalculatorMode inputCalc = new InputCalculatorMode();
+		// 入力値で計算処理を呼び出す
+		CalculatorMode calculatorMode = new CalculatorMode();
+		calculatorMode.selectMode(inputSelectMode, firstArgument, secondArgument);
 
-		inputCalc.selectMode(inputMode, a, b);
-
+		// テキスト・スキャナを閉じる。
 		stdIn.close();
 	}
 }
