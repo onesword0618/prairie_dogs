@@ -27,7 +27,7 @@ public class CalculatorMode {
 		switch (mode) {
 		// 計算方法：加算
 		case 0:
-			computation = calc.pluss(secondArgument, secondArgument);
+			computation = calc.pluss(firstArgument, secondArgument);
 			break;
 		// 計算方法：減算
 		case 1:
