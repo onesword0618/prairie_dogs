@@ -20,8 +20,14 @@ public class CsvWriter {
 	 */
 	public void init(List<Integer> rsltList) {
 
+		// CSVのタイトルも決めてもらったほうがわかりやすい？
+		// 一律こちらで決めたほうがわかりやすいかもしれない
+		
+		// CSVの見出しを作成
+		// TODO 何の項目を入れるべきか決めていない。
 		String[] namelist = { "計算結果", "B", "C" };
 
+		// 内容は一旦持ち出し予定
 		exportCsv(rsltList, namelist);
 	}
 
@@ -38,15 +44,22 @@ public class CsvWriter {
 		try {
 			// 出力場所を指定
 			// ユーザディレクトリを取得
+			// 環境依存を抜け出せるように変更しておく。
+			// Linuxでは動くか、他の環境は一切不明
+			// windowsは多分動かない
 			String userHome = System.getProperty("user.home").toString();
 
+			// 一旦、決め打ちで作成
+			// ディレクトリがなかった場合はどうするかは未確定
+			// Java側で提供されているAPIがあるのか、他のコマンドを載せて起動させるようにするのかは不明。
 			FileWriter fileWriter = new FileWriter(userHome + "/bin/Sample.csv", false);
 			PrintWriter printWriter = new PrintWriter(new BufferedWriter(fileWriter));
 
 			// ヘッダーの指定
+			// TODO DBでいうところのカラムに当たるところ何を表示させよう。
 			printWriter.print("順番");
 			printWriter.print(",");
-			printWriter.print("名前");
+			printWriter.print("計算結果");
 			printWriter.println();
 
 			// 内容セット

@@ -14,7 +14,7 @@ import java.util.Properties;
 public class ConfigReader {
 
 	// TOOD 全体の処理見直しでメイン機能に統合する
-	String userHome = System.getProperty("user.home").toString();
+	String sysCon = new SystemConfig().getUserHomePath();
 
 	private static final String INIT_FILE_PATH = "userHome + /bin/computation.csv";
 	private static final Properties properties;
