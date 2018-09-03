@@ -16,14 +16,17 @@ public class Core {
 	 */
 	public static void main(String[] args) {
 
-		/*
-		 * ★ライブラリ：java.util.Scanner
-		 * 
-		 * @see https://docs.oracle.com/javase/jp/10/docs/api/java/util/Scanner.html
-		 */
+		// java.util.Scanner
+		// https://docs.oracle.com/javase/jp/10/docs/api/java/util/Scanner.html
 		Scanner stdIn = new Scanner(System.in);
 
+		// スキャナーをリセットする。
+		stdIn.reset();
+
 		boolean isContinue = true;
+
+		int calcResult = 0;
+		int nextInputCalc = 0;
 
 		// ユーザの判断で計算処理が終わるか判定する
 		while (isContinue) {
@@ -31,37 +34,45 @@ public class Core {
 			/*
 			 * 案内表示文 コンソール画面に計算モードを選択する
 			 */
+			// java.lang.System
+			// https://docs.oracle.com/javase/jp/10/docs/api/java/lang/System.html
 			System.out.println("計算モードを選んでください");
 			System.out.println("0:加算 1:減算 2:乗算　3:除算");
 
 			// TODO 入力時に数値以外を入力したらエラーメッセージを出力するように変更する。
-
-			// 入力モードを選択させる
+			/*
+			 * 案内表示文 コンソール画面に計算モードを選択する
+			 */
 			int inputSelectMode = stdIn.nextInt();
 
-			/*
-			 * 計算値を投入する 小数は考慮しない 家計簿に小数って...?
-			 */
-			System.out.println("第１引数を入力してください");
+			// 計算値を投入する 小数は考慮しない 家計簿に小数って...?
+			System.out.println("第１引数の整数を入力してください");
 			int firstArgument = stdIn.nextInt();
-			System.out.println("第２引数を入力してください");
+			System.out.println("第２引数の整数を入力してください");
 			int secondArgument = stdIn.nextInt();
 
-			// 入力値で計算処理を呼び出す
+			// 計算処理の呼び出し
 			CalculatorMode calculatorMode = new CalculatorMode();
-			calculatorMode.selectMode(inputSelectMode, firstArgument, secondArgument);
+			calcResult = calculatorMode.selectMode(inputSelectMode, firstArgument, secondArgument);
 
-			System.out.println("計算処理を終了しますか。");
+			/*
+			 * 案内表示文 コンソール画面に計算処理の継続を求める
+			 */
+			System.out.println("計算処理を終了しますか");
 			System.out.println("0:YES 1:NO");
 
+			// ユーザ判断で計算処理継続
 			int inputContinue = stdIn.nextInt();
 
+			// 計算を終了する場合
 			if (inputContinue == 0) {
-				
-				// 繰り返し処理の継続判定処理
+
 				isContinue = false;
-				System.out.println("計算処理は終了しました。計算結果はCSVに出力されています");
+				System.out.println("計算処理は終了しました");
 			}
+
+			// 計算処理を継続する場合は前回の計算結果と合算する
+			nextInputCalc = nextInputCalc + calcResult;
 		}
 		// テキスト・スキャナを閉じる。
 		stdIn.close();
