@@ -1,8 +1,5 @@
 package main;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * 計算モード選択
  * 
@@ -24,6 +21,7 @@ public class CalculatorMode {
 
 		Calculator calc = new Calculator();
 
+		// 入力された値によって分岐処理
 		switch (mode) {
 		// 計算方法：加算
 		case 0:
@@ -42,18 +40,6 @@ public class CalculatorMode {
 			computation = calc.divided(firstArgument, secondArgument);
 			break;
 		}
-
-		// TODO 複数の計算結果を格納する予定?
-		// https://docs.oracle.com/javase/jp/10/docs/api/java/util/ArrayList.html
-		List<Integer> computationList = new ArrayList<>();
-
-		computationList.add(computation);
-
-		CsvWriter csvWriter = new CsvWriter();
-
-		csvWriter.init(computationList);
-
-		System.out.println(computation);
 		return computation;
 	}
 }
