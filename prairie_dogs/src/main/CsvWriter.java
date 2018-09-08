@@ -4,6 +4,9 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.Timestamp;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * CSV出力処理
@@ -21,10 +24,10 @@ public class CsvWriter {
 
 		// CSVの見出しを作成
 		// TODO 何の項目を入れるべきか決めていない。
-		String csvName = "計算結果";
+		LocalDateTime ldt = LocalDateTime.now();
 
 		// 内容は一旦持ち出し予定
-		exportCsv(computation, csvName);
+		exportCsv(computation, ldt);
 	}
 
 	/**
@@ -34,7 +37,7 @@ public class CsvWriter {
 	 * @param csvName CSVの見出し
 	 * 
 	 */
-	public static void exportCsv(int computation, String csvName) {
+	public static void exportCsv(int computation, LocalDateTime ldt) {
 
 		SystemConfig sys = new SystemConfig();
 		
@@ -55,7 +58,7 @@ public class CsvWriter {
 			printWriter.println("計算結果");
 
 			// 内容セット
-			printWriter.print(csvName);
+			printWriter.print(ldt);
 			printWriter.print(",");
 			printWriter.println(computation);
 			
