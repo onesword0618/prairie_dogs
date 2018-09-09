@@ -9,22 +9,23 @@ package main;
 public enum Message {
 
 	/**
-	 * 案内表示文
+	 * 計算モードを選んでください
 	 */
-	guid("計算モードを選んでください")
+	openingGuid("計算モードを選んでください")
 	
 	/**
-	 * 第一引数入力案内文
+	 * 第１引数の整数を入力してください
 	 */
 	,inputGuidFirstArgument("第１引数の整数を入力してください")
 	
 	/**
-	 * 第二引数入力案内文
+	 * 第２引数の整数を入力してください
 	 */
 	,inputGuidSecondArgument("第２引数の整数を入力してください")
 	
 	/**
-	 * 計算方式選択案内
+	 * 計算方式選択 <br>
+	 * 0:加算/ 1:減算/ 2:乗算/ 3:除算
 	 */
 	
 	,selectCalcMode(
