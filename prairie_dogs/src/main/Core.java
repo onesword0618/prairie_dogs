@@ -1,6 +1,8 @@
 package main;
 
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * 中心機能
@@ -16,14 +18,23 @@ public class Core {
 	 */
 	public static void main(String[] args) {
 
-		// 開始案内文
 		callStartMessege();
-		
-		// 計算実行
+
 		execCalculation();
-		
+
 	}
 
+	/**
+	 * 開始案内文表示
+	 */
+	private static void callStartMessege() {
+		System.out.println(Message.openingGuid.getMessege());
+		System.out.println(Message.selectCalcMode.getMessege());
+	}
+
+	/**
+	 * 計算実行
+	 */
 	private static void execCalculation() {
 
 		boolean isContinue = true;
@@ -31,22 +42,23 @@ public class Core {
 		int calcResult = 0;
 		int nextInputCalc = 0;
 
-		// java.util.Scanner
-		// https://docs.oracle.com/javase/jp/10/docs/api/java/util/Scanner.html
 		Scanner scanner = new Scanner(System.in);
-	
+
 		// ユーザの判断で計算処理が終わるか判定する
 		while (isContinue) {
 
+			int selectCalculationMethod = 0;
+			int firstArgument = 0;
+			int secondArgument = 0;
+
 			// 計算方式の選択
-			int selectCalculationMethod = inputScannerNumber(scanner);
+			selectCalculationMethod = inputScannerNumber(scanner);
 
 			// 計算値入力
-			// TODO 入力値の検査を行う
 			System.out.println(Message.inputGuidFirstArgument.getMessege());
-			int firstArgument = inputScannerNumber(scanner);
+			firstArgument = inputScannerNumber(scanner);
 			System.out.println(Message.inputGuidSecondArgument.getMessege());
-			int secondArgument = inputScannerNumber(scanner);
+			secondArgument = inputScannerNumber(scanner);
 
 			// 計算処理の呼び出し
 			CalculatorMode calculatorMode = new CalculatorMode();
@@ -69,8 +81,9 @@ public class Core {
 
 			exportCsvWriter(nextInputCalc);
 
-			scanner.close();
 		}
+
+		scanner.close();
 	}
 
 	private static void callContinueQuestionMessege() {
@@ -81,17 +94,26 @@ public class Core {
 		System.out.println(Message.selectIsContinue.getMessege());
 	}
 
-	private static void callStartMessege() {
-		// java.lang.System
-		// https://docs.oracle.com/javase/jp/10/docs/api/java/lang/System.html
-		System.out.println(Message.guid.getMessege());
-		System.out.println(Message.selectCalcMode.getMessege());
-	}
-
 	private static int inputScannerNumber(Scanner scanner) {
 
-		// 数値の入力をコンソールから受け取る
-		return scanner.nextInt();
+		boolean isContinue = true;
+
+		String checkInputScannerNumber = null;
+
+		while (isContinue) {
+			// 入力をコンソールから受け取る
+			checkInputScannerNumber = scanner.nextLine();
+
+			if (!checkNumber(checkInputScannerNumber)) {
+				System.out.println("整数以外の入力値を検知しました。整数を入力してください。");
+				System.out.println("再入力してください");
+				continue;
+			}
+			break;
+		}
+		int inputScannerNumber = Integer.parseInt(checkInputScannerNumber);
+
+		return inputScannerNumber;
 	}
 
 	private static void exportCsvWriter(int sumCalculate) {
@@ -100,5 +122,15 @@ public class Core {
 		CsvWriter cw = new CsvWriter();
 		cw.init(sumCalculate);
 	}
-	
+
+	private static boolean checkNumber(String str) {
+
+		// 判定するパターンを生成
+		// 数値であるか
+		Pattern pattern = Pattern.compile("^[0-9]*$");
+		Matcher matcher = pattern.matcher(str);
+
+		return matcher.find();
+	}
+
 }
