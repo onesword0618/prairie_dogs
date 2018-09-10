@@ -42,6 +42,10 @@ public enum Message {
 	,guidFInishCalc("計算処理を終了しますか")
 	
 	,guidFinish("計算処理は終了しました")
+	
+	,inspection("整数以外の入力値を検知しました。整数を入力してください。")
+	
+	,reInput("再入力してください")
 	;
 	
 	private final String msg;
