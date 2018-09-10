@@ -39,9 +39,10 @@ public class Core {
 
 		boolean isContinue = true;
 
-		int calcResult = 0;
-		int nextInputCalc = 0;
+		int calculatorResult = 0;
+		int nextInputCalculator = 0;
 
+		// テキストスキャナーを生成
 		Scanner scanner = new Scanner(System.in);
 
 		// ユーザの判断で計算処理が終わるか判定する
@@ -62,12 +63,10 @@ public class Core {
 
 			// 計算処理の呼び出し
 			CalculatorMode calculatorMode = new CalculatorMode();
-			calcResult = calculatorMode.selectMode(selectCalculationMethod, firstArgument, secondArgument);
+			calculatorResult = calculatorMode.selectMode(selectCalculationMethod, firstArgument, secondArgument);
 
-			// 継続確認案内
 			callContinueQuestionMessege();
 
-			// ユーザ判断で計算処理継続
 			int inputContinue = inputScannerNumber(scanner);
 
 			// 計算を終了する場合
@@ -77,15 +76,18 @@ public class Core {
 			}
 
 			// 計算処理を継続する場合は前回の計算結果と合算する
-			nextInputCalc = nextInputCalc + calcResult;
+			nextInputCalculator = nextInputCalculator + calculatorResult;
 
-			exportCsvWriter(nextInputCalc);
+			exportCsvWriter(nextInputCalculator);
 
 		}
 
 		scanner.close();
 	}
 
+	/**
+	 * 継続確認案内
+	 */
 	private static void callContinueQuestionMessege() {
 		/*
 		 * 案内表示文 コンソール画面に計算処理の継続を求める
@@ -94,6 +96,12 @@ public class Core {
 		System.out.println(Message.selectIsContinue.getMessege());
 	}
 
+	/**
+	 * 整数値検査
+	 * 
+	 * @param scanner
+	 * @return 整数値
+	 */
 	private static int inputScannerNumber(Scanner scanner) {
 
 		boolean isContinue = true;
@@ -105,17 +113,21 @@ public class Core {
 			checkInputScannerNumber = scanner.nextLine();
 
 			if (!checkNumber(checkInputScannerNumber)) {
-				System.out.println("整数以外の入力値を検知しました。整数を入力してください。");
-				System.out.println("再入力してください");
+				System.out.println(Message.inspection.getMessege());
+				System.out.println(Message.reInput.getMessege());
 				continue;
 			}
 			break;
 		}
-		int inputScannerNumber = Integer.parseInt(checkInputScannerNumber);
-
-		return inputScannerNumber;
+		
+		// 入力値を返却する
+		return Integer.parseInt(checkInputScannerNumber);
 	}
 
+	/**
+	 * CSV出力
+	 * @param sumCalculate
+	 */
 	private static void exportCsvWriter(int sumCalculate) {
 
 		// CSV出力を行う
@@ -123,6 +135,11 @@ public class Core {
 		cw.init(sumCalculate);
 	}
 
+	/**
+	 * 正規表現：数値
+	 * @param str
+	 * @return true: 数値
+	 */
 	private static boolean checkNumber(String str) {
 
 		// 判定するパターンを生成
