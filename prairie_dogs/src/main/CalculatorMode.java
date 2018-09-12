@@ -8,38 +8,57 @@ package main;
 public class CalculatorMode {
 
 	/**
-	 * 計算方法の選択処理
+	 * 計算方法のメッセージ出力
 	 * 
 	 * @param mode
-	 * @param firstArgument
-	 * @param secondArgument
-	 * @return 選択した計算方法の計算結果
 	 */
-	public int selectMode(int mode, int firstArgument, int secondArgument) {
-
-		int computation = 0;
-
-		Calculator calc = new Calculator();
+	// TODO メッセージをEnum定数にする
+	public int selectModeMessage(int mode) {
 
 		// 入力された値によって分岐処理
 		switch (mode) {
 		// 計算方法：加算
 		case 0:
-			computation = calc.pluss(firstArgument, secondArgument);
+			System.out.println("選択した計算処理方法は加算です");
 			break;
 		// 計算方法：減算
 		case 1:
-			computation = calc.minus(firstArgument, secondArgument);
+			System.out.println("選択した計算処理方法は減算です");
 			break;
 		// 計算方法：乗算
 		case 2:
-			computation = calc.multiply(firstArgument, secondArgument);
+			System.out.println("選択した計算処理方法は乗算です");
 			break;
 		// 計算方法：除算
 		case 3:
-			computation = calc.divided(firstArgument, secondArgument);
+			System.out.println("選択した計算処理方法は除算です");
 			break;
 		}
-		return computation;
+		return mode;
+	}
+
+	/**
+	 * 計算処理の実行<br>
+	 * 
+	 * @param mode
+	 * @param first
+	 * @param second
+	 * @return
+	 */
+	public int callCalculator(int mode, int first, int second) {
+
+		Calculator calc = new Calculator();
+
+		switch (mode) {
+		case 0:
+			return calc.pluss(first, second);
+		case 1:
+			return calc.minus(first, second);
+		case 2:
+			return calc.multiply(first, second);
+		case 3:
+			return calc.multiply(first, second);
+		}
+		return mode;
 	}
 }

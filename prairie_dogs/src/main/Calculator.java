@@ -1,7 +1,7 @@
 package main;
 
 /**
- * 計算処理
+ * 演算処理
  * 
  * @author onesword0618
  */
