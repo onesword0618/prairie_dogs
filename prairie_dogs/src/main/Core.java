@@ -26,6 +26,7 @@ public class Core {
 
 	/**
 	 * 開始案内文表示
+	 * 
 	 */
 	private static void callStartMessege() {
 		System.out.println(Message.openingGuid.getMessege());
@@ -34,6 +35,7 @@ public class Core {
 
 	/**
 	 * 計算実行
+	 * 
 	 */
 	private static void execCalculation() {
 
@@ -48,12 +50,12 @@ public class Core {
 		// ユーザの判断で計算処理が終わるか判定する
 		while (isContinue) {
 
-			int selectCalculationMethod = 0;
 			int firstArgument = 0;
 			int secondArgument = 0;
 
-			// 計算方式の選択
-			selectCalculationMethod = inputScannerNumber(scanner);
+			// 計算処理方式のメッセージを出力
+			CalculatorMode calculatorMode = new CalculatorMode();
+			int selectMode = calculatorMode.selectModeMessage(inputScannerNumber(scanner));
 
 			// 計算値入力
 			System.out.println(Message.inputGuidFirstArgument.getMessege());
@@ -61,9 +63,8 @@ public class Core {
 			System.out.println(Message.inputGuidSecondArgument.getMessege());
 			secondArgument = inputScannerNumber(scanner);
 
-			// 計算処理の呼び出し
-			CalculatorMode calculatorMode = new CalculatorMode();
-			calculatorResult = calculatorMode.selectMode(selectCalculationMethod, firstArgument, secondArgument);
+			// 計算処理
+			calculatorMode.callCalculator(selectMode, firstArgument, secondArgument);
 
 			callContinueQuestionMessege();
 
@@ -78,15 +79,17 @@ public class Core {
 			// 計算処理を継続する場合は前回の計算結果と合算する
 			nextInputCalculator = nextInputCalculator + calculatorResult;
 
+			// CSV出力
 			exportCsvWriter(nextInputCalculator);
-
 		}
 
+		// テキスト・スキャナーを閉じる。
 		scanner.close();
 	}
 
 	/**
 	 * 継続確認案内
+	 * 
 	 */
 	private static void callContinueQuestionMessege() {
 		/*
@@ -119,13 +122,13 @@ public class Core {
 			}
 			break;
 		}
-		
 		// 入力値を返却する
 		return Integer.parseInt(checkInputScannerNumber);
 	}
 
 	/**
 	 * CSV出力
+	 * 
 	 * @param sumCalculate
 	 */
 	private static void exportCsvWriter(int sumCalculate) {
@@ -137,6 +140,7 @@ public class Core {
 
 	/**
 	 * 正規表現：数値
+	 * 
 	 * @param str
 	 * @return true: 数値
 	 */
