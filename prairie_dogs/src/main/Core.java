@@ -1,8 +1,6 @@
 package main;
 
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * 中心機能
@@ -25,7 +23,7 @@ public class Core {
 	}
 
 	/**
-	 * 開始案内文表示
+	 * 開始案内文表示<br>
 	 * 
 	 */
 	private static void callStartMessege() {
@@ -34,7 +32,7 @@ public class Core {
 	}
 
 	/**
-	 * 計算実行
+	 * 計算実行<br>
 	 * 
 	 */
 	private static void execCalculation() {
@@ -88,7 +86,7 @@ public class Core {
 	}
 
 	/**
-	 * 継続確認案内
+	 * 継続確認案内<br>
 	 * 
 	 */
 	private static void callContinueQuestionMessege() {
@@ -102,8 +100,8 @@ public class Core {
 	/**
 	 * 整数値検査
 	 * 
-	 * @param scanner
-	 * @return 整数値
+	 * @param scanner コンソールからの入力値
+	 * @return int : 整数値
 	 */
 	private static int inputScannerNumber(Scanner scanner) {
 
@@ -115,7 +113,7 @@ public class Core {
 			// 入力をコンソールから受け取る
 			checkInputScannerNumber = scanner.nextLine();
 
-			if (!checkNumber(checkInputScannerNumber)) {
+			if (!CheckRegex.checkNumber(checkInputScannerNumber)) {
 				System.out.println(Message.inspection.getMessege());
 				System.out.println(Message.reInput.getMessege());
 				continue;
@@ -129,29 +127,13 @@ public class Core {
 	/**
 	 * CSV出力
 	 * 
-	 * @param sumCalculate
+	 * @param sumCalculate : 計算処理された合計値
 	 */
 	private static void exportCsvWriter(int sumCalculate) {
 
 		// CSV出力を行う
 		CsvWriter cw = new CsvWriter();
 		cw.init(sumCalculate);
-	}
-
-	/**
-	 * 正規表現：数値
-	 * 
-	 * @param str
-	 * @return true: 数値
-	 */
-	private static boolean checkNumber(String str) {
-
-		// 判定するパターンを生成
-		// 数値であるか
-		Pattern pattern = Pattern.compile("^[0-9]*$");
-		Matcher matcher = pattern.matcher(str);
-
-		return matcher.find();
 	}
 
 }
