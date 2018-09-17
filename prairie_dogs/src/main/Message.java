@@ -46,6 +46,8 @@ public enum Message {
 	,inspection("整数以外の入力値を検知しました。整数を入力してください。")
 	
 	,reInput("再入力してください")
+	
+	,prcsPluss("選択した計算処理方法は加算です")
 	;
 	
 	private final String msg;
