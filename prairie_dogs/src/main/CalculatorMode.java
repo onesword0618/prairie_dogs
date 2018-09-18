@@ -8,30 +8,29 @@ package main;
 public class CalculatorMode {
 
 	/**
-	 * 計算方法のメッセージ出力
+	 * 計算方法のメッセージ出力<br>
 	 * 
 	 * @param mode
 	 */
-	// TODO メッセージをEnum定数にする
 	public int selectModeMessage(int mode) {
 
 		// 入力された値によって分岐処理
 		switch (mode) {
 		// 計算方法：加算
 		case 0:
-			System.out.println("選択した計算処理方法は加算です");
+			System.out.println(Message.prcsPluss.getMessege());
 			break;
 		// 計算方法：減算
 		case 1:
-			System.out.println("選択した計算処理方法は減算です");
+			System.out.println(Message.prcsMinus.getMessege());
 			break;
 		// 計算方法：乗算
 		case 2:
-			System.out.println("選択した計算処理方法は乗算です");
+			System.out.println(Message.prcsMultiply.getMessege());
 			break;
 		// 計算方法：除算
 		case 3:
-			System.out.println("選択した計算処理方法は除算です");
+			System.out.println(Message.prcsDivided.getMessege());
 			break;
 		}
 		return mode;
