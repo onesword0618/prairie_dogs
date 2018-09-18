@@ -133,7 +133,7 @@ public class Core {
 
 		// CSV出力を行う
 		CsvWriter cw = new CsvWriter();
-		cw.init(sumCalculate);
+		cw.exportCsv(sumCalculate);
 	}
 
 }

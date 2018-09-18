@@ -1,14 +1,14 @@
 package main;
 
 /**
- * 演算処理
+ * 演算処理<br>
  * 
  * @author onesword0618
  */
 public class Calculator {
 
 	/**
-	 * 加算処理
+	 * 加算処理<br>
 	 * 
 	 * @param x
 	 * @param y
@@ -19,7 +19,7 @@ public class Calculator {
 	}
 
 	/**
-	 * 減算処理
+	 * 減算処理<br>
 	 * 
 	 * @param x
 	 * @param y
@@ -30,7 +30,7 @@ public class Calculator {
 	}
 
 	/**
-	 * 乗算処理
+	 * 乗算処理<br>
 	 * 
 	 * @param x
 	 * @param y
@@ -41,7 +41,7 @@ public class Calculator {
 	}
 
 	/**
-	 * 除算処理
+	 * 除算処理<br>
 	 * 
 	 * @param x
 	 * @param y

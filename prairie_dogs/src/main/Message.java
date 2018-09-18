@@ -48,6 +48,14 @@ public enum Message {
 	,reInput("再入力してください")
 	
 	,prcsPluss("選択した計算処理方法は加算です")
+	
+	,prcsMinus("選択した計算処理方法は減算です")
+	
+	,prcsMultiply("選択した計算処理方法は乗算です")
+	
+	,prcsDivided("選択した計算処理方法は除算です")
+	
+	,exportCsv("CSVを出力しました。")
 	;
 	
 	private final String msg;
