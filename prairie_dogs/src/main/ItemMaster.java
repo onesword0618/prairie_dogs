@@ -1,9 +1,10 @@
 package main;
 
 import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
+import java.util.StringTokenizer;
 
 /**
  * 品目マスタ<br>
@@ -20,7 +21,7 @@ public class ItemMaster {
 	 * 品目マスタの主要機能を取り扱う<br>
 	 * 
 	 */
-	public static void MainProcs() {
+	public static void main(String[] args) {
 
 		// 核の機能
 		// 品目の更新
@@ -31,7 +32,7 @@ public class ItemMaster {
 		// CSVの出力
 		// CSVの読込
 		// コンソールに操作結果の出力
-		
+
 		String str = null;
 
 		readInitCsvFile();
@@ -48,15 +49,34 @@ public class ItemMaster {
 	 * 
 	 */
 	private static List<String> readInitCsvFile() {
+		SystemConfig sys = new SystemConfig();
 
-		// TODO クラス生成時に呼ばれるようにして中のメソッドで呼ぶとき一度読み込んだファイルで対応するようにしたい。
-		// try ~catch で取得する
-		// ディレクトリのパスを取得
-		
-		InputStream is = ClassLoader.getSystemResourceAsStream("subres/Item.csv");
-		
-		BufferedReader br = new BufferedReader(new InputStreamReader(is));
+		try {
+			// ファイル読込
+			FileReader fileReder = new FileReader(
+					sys.getUserHomePath() + "src/prairie/prairie_dogs/src/main/resources/Item.csv");
+			BufferedReader bufferedReader = new BufferedReader(fileReder);
 
+			// 読み込んだファイルを１行ずつ処理する
+			String line;
+			StringTokenizer token;
+			while ((line = bufferedReader.readLine()) != null) {
+				// 区切り文字","で分割する
+				token = new StringTokenizer(line, ",");
+
+				// 分割した文字を画面出力する
+				while (token.hasMoreTokens()) {
+					System.out.println(token.nextToken());
+				}
+				System.out.println("**********");
+			}
+
+			// 終了処理
+			bufferedReader.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		// CSVが存在しているか確認
 
 		// 該当のCSVファイルが存在しない場合は新規でCSVファイルを作成
@@ -116,9 +136,9 @@ public class ItemMaster {
 	 * @return
 	 */
 	private static void updateItem(String itemName) {
-		
+
 	}
-	
+
 	/**
 	 * 品目の削除機能<br>
 	 * 品目の情報を削除する<br>
@@ -127,9 +147,9 @@ public class ItemMaster {
 	 * @return
 	 */
 	private static void deleteItem(String itemName) {
-		
+
 	}
-	
+
 	// 存在チェックは読込時に行っている想定
 	// 引数のチェック処理
 	private static boolean isInputName(String str) {
@@ -143,7 +163,5 @@ public class ItemMaster {
 		return "あなたが選択した品目は" + str + "ですね";
 
 	}
-
-
 
 }
