@@ -1,19 +1,22 @@
 package main;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
 import java.util.StringTokenizer;
 
 /**
  * 品目マスタ<br>
+ * 
  * 品目の登録、更新、削除を行う<br>
  * 
  * @author onesword0618
  *
  */
-public class ItemMaster {
+public class ItemMaster implements MasterInterface {
 
 	/**
 	 * 品目マスタの主要機能<br>
@@ -21,7 +24,7 @@ public class ItemMaster {
 	 * 品目マスタの主要機能を取り扱う<br>
 	 * 
 	 */
-	public static void main(String[] args) {
+	public void mainPrcs() {
 
 		// 核の機能
 		// 品目の更新
@@ -37,7 +40,7 @@ public class ItemMaster {
 
 		readInitCsvFile();
 
-		registItem(str);
+		regist(str);
 
 	}
 
@@ -51,15 +54,39 @@ public class ItemMaster {
 	private static List<String> readInitCsvFile() {
 		SystemConfig sys = new SystemConfig();
 
-		try {
-			// ファイル読込
-			FileReader fileReder = new FileReader(
-					sys.getUserHomePath() + "src/prairie/prairie_dogs/src/main/resources/Item.csv");
-			BufferedReader bufferedReader = new BufferedReader(fileReder);
+		// 対象のディレクトリを取得する。
+		File resourcesFile = new File(sys.getUserHomePath() + "src/prairie/prairie_dogs/src/main/resources");
 
+		// 対象のディレクトリがない場合
+		if (!resourcesFile.exists()) {
+			// 対象のディレクトリを作成する
+			resourcesFile.mkdir();
+
+		}
+		
+		// 品目マスタのリソースファイルを取得する
+		File resourcesFileCsvFile = new File(resourcesFile + "Item.csv");
+		
+		// 対象のリソースファイルがない場合
+		if(!resourcesFileCsvFile.exists()) {
+			// 対象のファイルを作成する
+			resourcesFileCsvFile.mkdir();
+			
+		}
+		
+		// 読込処理の実行
+		try {
+
+			// 対象のファイルを読み込む
+			BufferedReader bufferedReader = new BufferedReader(new FileReader(resourcesFileCsvFile));
+
+			// 該当のリソースの中身が空っぽかどうか
+			
 			// 読み込んだファイルを１行ずつ処理する
 			String line;
 			StringTokenizer token;
+
+			//　分割して取り出す
 			while ((line = bufferedReader.readLine()) != null) {
 				// 区切り文字","で分割する
 				token = new StringTokenizer(line, ",");
@@ -97,16 +124,19 @@ public class ItemMaster {
 	}
 
 	/**
+	 * {@inheritDoc}
+	 * <p>
 	 * 品目の登録機能<br>
 	 * 品目の情報を登録する<br>
+	 * </p>
 	 * 
-	 * @param itemName
+	 * @param name 項目名
 	 */
-	private static void registItem(String itemName) {
+	public void regist(String name) {
 
 		// 妥当な名前かどうかの確認
 		// 特殊文字が利用されていないこと
-		if (!isInputName(itemName)) {
+		if (!isInputName(name)) {
 
 			System.out.println(Message.inspection.getMessege());
 
@@ -115,7 +145,7 @@ public class ItemMaster {
 		// 読み込んだCSVファイルから検索して同じ品目が登録されていないかを確認する。
 
 		// 取得した品目を表示
-		createItemMessage(itemName);
+		createItemMessage(name);
 
 		// 現在の品目の登録状況を表示するためにCSVを読み込む
 		// 表示する
@@ -135,7 +165,7 @@ public class ItemMaster {
 	 * @param itemName
 	 * @return
 	 */
-	private static void updateItem(String itemName) {
+	public void update(String name) {
 
 	}
 
@@ -146,7 +176,7 @@ public class ItemMaster {
 	 * @param str
 	 * @return
 	 */
-	private static void deleteItem(String itemName) {
+	public void delete(String name) {
 
 	}
 
