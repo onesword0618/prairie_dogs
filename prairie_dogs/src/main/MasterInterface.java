@@ -45,4 +45,17 @@ public interface MasterInterface {
 	 */
 	void delete(String name);
 
+	/**
+	 * マスタの検索
+	 * <p>
+	 * マスタの検索を行う
+	 * 
+	 * @param name
+	 * @return　検索結果の名前
+	 */
+	static boolean search(String name) {
+		
+		return false;
+	}
+	
 }

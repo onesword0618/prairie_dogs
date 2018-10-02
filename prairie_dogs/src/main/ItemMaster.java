@@ -1,17 +1,11 @@
 package main;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.util.List;
-import java.util.StringTokenizer;
 
 /**
  * 品目マスタ<br>
  * 
- * 品目の登録、更新、削除を行う<br>
+ * 品目の登録、更新、削除、検索を行う<br>
  * 
  * @author onesword0618
  *
@@ -19,179 +13,107 @@ import java.util.StringTokenizer;
 public class ItemMaster implements MasterInterface {
 
 	/**
-	 * 品目マスタの主要機能<br>
+	 * 品目マスタの主要処理<br>
 	 * 
 	 * 品目マスタの主要機能を取り扱う<br>
+	 * 
+	 * 品目マスタの処理を順次呼び出していく<br>
 	 * 
 	 */
 	public void mainPrcs() {
 
-		// 核の機能
-		// 品目の更新
-		// 品目の削除
-		// 品目の検索
+		// 初期処理
+		// 設定ファイル読込(プロパティファイル)
+		// ここから格納先を読み込む
+		
+		// 品目マスタCSVファイル読込
+		// 使用者側で品目を編集することができるようにするため
+		// 中身がない場合とあった場合を考慮にいれること
+		// リソースファイル読込
+		// 番号
+		// 登録日付
+		// 品目名
 
-		// サブ機能
-		// CSVの出力
-		// CSVの読込
-		// コンソールに操作結果の出力
+		// 読込内容をコンソールで出力
+		// 件数
+		// 番号
+		// 品目名一覧
 
-		String str = null;
+		// 1 登録処理
+		// 品目名重複チェック
+		// CSVファイルへ書き込み
+		// 登録結果を一覧出力
 
-		readInitCsvFile();
+		// 2 検索処理
+		// 品目名の存在チェック
+		// 検索結果をコンソールに出力
 
-		regist(str);
+		// 3 更新処理
+		// 品目名の存在チェック
+		// 上書き入力する品目重複チェック
+		// 更新結果をコンソール出力
+
+		// 4 削除処理
+		// 品目名の存在チェック
+		// 削除確認
+		// CSVファイルからの消込
+		// 削除結果のコンソール出力
 
 	}
-
+	
 	/**
-	 * CSVファイルの初回読込<br>
+	 * 初期処理<br>
 	 * 
-	 * 指定されたディレクトリにあるCSVを読み込む<br>
-	 * 存在しない場合は、新規に作成する。<br>
+	 * 品目マスタで処理を行うリソースファイルを読み込む
 	 * 
+	 * @return
 	 */
-	private static List<String> readInitCsvFile() {
-		SystemConfig sys = new SystemConfig();
-
-		// 対象のディレクトリを取得する。
-		File resourcesFile = new File(sys.getUserHomePath() + "src/prairie/prairie_dogs/src/main/resources");
-
-		// 対象のディレクトリがない場合
-		if (!resourcesFile.exists()) {
-			// 対象のディレクトリを作成する
-			resourcesFile.mkdir();
-
-		}
+	private List<String> init(){
 		
-		// 品目マスタのリソースファイルを取得する
-		File resourcesFileCsvFile = new File(resourcesFile + "Item.csv");
-		
-		// 対象のリソースファイルがない場合
-		if(!resourcesFileCsvFile.exists()) {
-			// 対象のファイルを作成する
-			resourcesFileCsvFile.mkdir();
-			
-		}
-		
-		// 読込処理の実行
-		try {
-
-			// 対象のファイルを読み込む
-			BufferedReader bufferedReader = new BufferedReader(new FileReader(resourcesFileCsvFile));
-
-			// 該当のリソースの中身が空っぽかどうか
-			
-			// 読み込んだファイルを１行ずつ処理する
-			String line;
-			StringTokenizer token;
-
-			//　分割して取り出す
-			while ((line = bufferedReader.readLine()) != null) {
-				// 区切り文字","で分割する
-				token = new StringTokenizer(line, ",");
-
-				// 分割した文字を画面出力する
-				while (token.hasMoreTokens()) {
-					System.out.println(token.nextToken());
-				}
-				System.out.println("**********");
-			}
-
-			// 終了処理
-			bufferedReader.close();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		// CSVが存在しているか確認
-
-		// 該当のCSVファイルが存在しない場合は新規でCSVファイルを作成
-		// 同じディレクトリに複数の機能で利用するCSVファイルの集合体が配置される予定
-
-		// 読み込んだCSVファイルをマップ方式かリスト方式で持つようにするか要相談
-		// 現段階で持っている情報
-		// ヘッダー情報
-		// マスター情報
-		// 品目管理番号
-		// 品目名
-		// 品目概要
-		// 登録日
-		// 更新日
-
-		// 読み込んだCSV情報
 		return null;
 	}
-
+	
 	/**
-	 * {@inheritDoc}
-	 * <p>
-	 * 品目の登録機能<br>
-	 * 品目の情報を登録する<br>
-	 * </p>
+	 * CSVファイルに品目名を登録する
 	 * 
-	 * @param name 項目名
+	 * CSVファイルに存在しない品目名を新規で登録を行う
+	 * 
 	 */
 	public void regist(String name) {
-
-		// 妥当な名前かどうかの確認
-		// 特殊文字が利用されていないこと
-		if (!isInputName(name)) {
-
-			System.out.println(Message.inspection.getMessege());
-
-		}
-
-		// 読み込んだCSVファイルから検索して同じ品目が登録されていないかを確認する。
-
-		// 取得した品目を表示
-		createItemMessage(name);
-
-		// 現在の品目の登録状況を表示するためにCSVを読み込む
-		// 表示する
-
-		// 登録するかの是非の問い合わせ
-		// OKなら品目用のCSVに登録処理を行う
-
-		// メッセージ：登録処理が完了しました。現在は以下のような登録状況です
-		// 登録処理が終わったCSVの内容を表示する
-
+		
+		
 	}
-
+	
 	/**
-	 * 品目の更新機能<br>
-	 * 品目の情報を更新する<br>
+	 * CSVファイルにある品目名を更新する
 	 * 
-	 * @param itemName
-	 * @return
+	 * CSVファイルに存在している品目名を別名のCSVファイルに存在しない名前で更新処理を行う
+	 *  
 	 */
 	public void update(String name) {
-
+		
 	}
-
+	
 	/**
-	 * 品目の削除機能<br>
-	 * 品目の情報を削除する<br>
+	 * CSVファイルにある品目名を削除する<br>
 	 * 
-	 * @param str
-	 * @return
+	 * CSVファイルに存在している品目名をCSVファイルから削除処理を行う
+	 * 
 	 */
 	public void delete(String name) {
-
+		
 	}
-
-	// 存在チェックは読込時に行っている想定
-	// 引数のチェック処理
-	private static boolean isInputName(String str) {
-
-		return str.matches("^[0-9]*$");
-
+	
+	/**
+	 * CSVファイルに品目名が含まれているか検索する<br>
+	 * 
+	 * CSVファイルに含まれているか検索する
+	 * 
+	 * @param name
+	 * @return
+	 */
+	public boolean search(String name) {
+		return false;
+		
 	}
-
-	private static String createItemMessage(String str) {
-
-		return "あなたが選択した品目は" + str + "ですね";
-
-	}
-
 }
