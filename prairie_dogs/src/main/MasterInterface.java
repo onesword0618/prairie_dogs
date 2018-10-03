@@ -1,9 +1,17 @@
+/**
+ * Copyright © 2018
+ * 
+ * TM:gush 
+ * ---
+ * 世界の隅っこで人に対してワクワクを与える価値が提供できるように生きています。
+ * ---
+ */
 package main;
 
 /**
  * 家計簿アプリケーションで利用する管理マスタのための基本インターフェイス<br>
  * <p>
- * このインターフェイスを実装するクラスはマスタ系の基本機能<br>
+ * このインターフェイスを実装するクラスはマスタ系の基本機能を有する<br>
  * 登録、更新、削除、検索を実装する。<br>
  * </p>
  * 
@@ -46,16 +54,16 @@ public interface MasterInterface {
 	void delete(String name);
 
 	/**
-	 * マスタの検索
+	 * マスタの検索<br>
 	 * <p>
 	 * マスタの検索を行う
 	 * 
 	 * @param name
-	 * @return　検索結果の名前
+	 * @return 検索結果の名前
 	 */
 	static boolean search(String name) {
-		
+
 		return false;
 	}
-	
+
 }
