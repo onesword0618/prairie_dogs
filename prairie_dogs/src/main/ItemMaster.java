@@ -1,6 +1,13 @@
 package main;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * 品目マスタ<br>
@@ -19,13 +26,16 @@ public class ItemMaster implements MasterInterface {
 	 * 
 	 * 品目マスタの処理を順次呼び出していく<br>
 	 * 
+	 * @throws IOException
+	 * 
 	 */
-	public void mainPrcs() {
+	public void mainPrcs() throws IOException {
 
 		// 初期処理
 		// 設定ファイル読込(プロパティファイル)
 		// ここから格納先を読み込む
-		
+		init();
+
 		// 品目マスタCSVファイル読込
 		// 使用者側で品目を編集することができるようにするため
 		// 中身がない場合とあった場合を考慮にいれること
@@ -60,19 +70,33 @@ public class ItemMaster implements MasterInterface {
 		// 削除結果のコンソール出力
 
 	}
-	
+
 	/**
 	 * 初期処理<br>
 	 * 
-	 * 品目マスタで処理を行うリソースファイルを読み込む
+	 * 品目マスタで処理を行うリソースファイルを読み込む<br>
+	 * {@link Properties}
 	 * 
 	 * @return
 	 */
-	private List<String> init(){
-		
+	private List<String> init() throws IOException {
+
+		// 設定ファイル読込
+		InputStream stream = ItemMaster.class.getClassLoader().getResourceAsStream("init.properties");
+
+		InputStreamReader isr = new InputStreamReader(stream, "UTF-8");
+
+		BufferedReader br = new BufferedReader(isr);
+
+		Properties prop = new Properties();
+
+		prop.load(br);
+
+		System.out.println(prop.getProperty("config"));
+
 		return null;
 	}
-	
+
 	/**
 	 * CSVファイルに品目名を登録する
 	 * 
@@ -80,20 +104,19 @@ public class ItemMaster implements MasterInterface {
 	 * 
 	 */
 	public void regist(String name) {
-		
-		
+
 	}
-	
+
 	/**
 	 * CSVファイルにある品目名を更新する
 	 * 
 	 * CSVファイルに存在している品目名を別名のCSVファイルに存在しない名前で更新処理を行う
-	 *  
+	 * 
 	 */
 	public void update(String name) {
-		
+
 	}
-	
+
 	/**
 	 * CSVファイルにある品目名を削除する<br>
 	 * 
@@ -101,9 +124,9 @@ public class ItemMaster implements MasterInterface {
 	 * 
 	 */
 	public void delete(String name) {
-		
+
 	}
-	
+
 	/**
 	 * CSVファイルに品目名が含まれているか検索する<br>
 	 * 
@@ -114,6 +137,6 @@ public class ItemMaster implements MasterInterface {
 	 */
 	public boolean search(String name) {
 		return false;
-		
+
 	}
 }
