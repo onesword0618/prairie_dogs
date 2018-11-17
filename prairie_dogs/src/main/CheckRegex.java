@@ -39,23 +39,7 @@ public class CheckRegex {
 		// 数値であるか
 		Pattern pattern = Pattern.compile("^[0-9]*$");
 		Matcher matcher = pattern.matcher(str);
-
-		return matcher.find();
-	}
-	
-	/**
-	 * 正規表現：平仮名
-	 * 
-	 * @param str 対象文字列
-	 * @return true: 数値である
-	 */
-	public static boolean checkHiragana(String str) {
-
-		// 判定するパターンを生成
-		// 平仮名であるか
-		Pattern pattern = Pattern.compile("\\p{InHiragana}");
-		Matcher matcher = pattern.matcher(str);
-
+		
 		return matcher.find();
 	}
 }

@@ -6,7 +6,7 @@ package main;
  * @author onesword0618
  *
  */
-public enum Message {
+public enum Message implements ConsoleInterface {
 
 	/**
 	 * 計算モードを選んでください
