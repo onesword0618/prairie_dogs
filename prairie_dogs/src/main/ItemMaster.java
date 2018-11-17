@@ -30,12 +30,15 @@ public class ItemMaster implements MasterInterface {
 	 * 
 	 */
 	public void mainPrcs() throws IOException {
-
+		
+		// コンストラクタ
+		mainPrcs();
+		
 		// 初期処理
 		// 設定ファイル読込(プロパティファイル)
 		// ここから格納先を読み込む
-		init();
-
+		
+		
 		// 品目マスタCSVファイル読込
 		// 使用者側で品目を編集することができるようにするため
 		// 中身がない場合とあった場合を考慮にいれること
@@ -135,7 +138,7 @@ public class ItemMaster implements MasterInterface {
 	 * @param name
 	 * @return
 	 */
-	public boolean search(String name) {
+	public boolean isSearch(String name) {
 		return false;
 
 	}

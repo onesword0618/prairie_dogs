@@ -5,49 +5,46 @@ package main;
  * 
  * @author onesword0618
  */
-public class Calculator {
+public class Calculator implements CalcOperatorInterface {
+	
+	// コンストラクタ
+	public Calculator() {
 
-	/**
-	 * 加算処理<br>
-	 * 
-	 * @param x
-	 * @param y
-	 * @return 加算結果
-	 */
-	public int pluss(int x, int y) {
-		return x + y;
 	}
 
-	/**
-	 * 減算処理<br>
-	 * 
-	 * @param x
-	 * @param y
-	 * @return 減算結果
-	 */
-	public int minus(int x, int y) {
-		return x - y;
+	@Override
+	public Object plus(Object arg1, Object arg2) {
+		
+		return toInteger(arg1) + toInteger(arg2);
 	}
 
-	/**
-	 * 乗算処理<br>
-	 * 
-	 * @param x
-	 * @param y
-	 * @return 乗算結果
-	 */
-	public int multiply(int x, int y) {
-		return x * y;
+	@Override
+	public Object minus(Object arg1, Object arg2) {
+			
+		return toInteger(arg1) - toInteger(arg2);
 	}
 
+	@Override
+	public Object mult(Object arg1, Object arg2) {
+		
+		return toInteger(arg1) * toInteger(arg2);
+	}
+
+	@Override
+	public Object div(Object arg1, Object arg2) {
+
+		return toInteger(arg1) / toInteger(arg2);
+	}
+	
 	/**
-	 * 除算処理<br>
+	 * 型変換メソッド
+	 * Object →　Integer　に型変換を行うメソッド
 	 * 
-	 * @param x
-	 * @param y
-	 * @return 除算結果
+	 * @param arg Object型の引数
+	 * @return　Integer型の返却値
 	 */
-	public int divided(int x, int y) {
-		return x / y;
+	private int toInteger(Object arg) {
+		
+		return Integer.parseInt(arg.toString());
 	}
 }

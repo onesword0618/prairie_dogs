@@ -44,19 +44,19 @@ public class CalculatorMode {
 	 * @param second
 	 * @return
 	 */
-	public int callCalculator(int mode, int first, int second) {
+	public Object callCalculator(int mode, int first, int second) {
 
 		Calculator calc = new Calculator();
 
 		switch (mode) {
 		case 0:
-			return calc.pluss(first, second);
+			return calc.plus(first, second);
 		case 1:
 			return calc.minus(first, second);
 		case 2:
-			return calc.multiply(first, second);
+			//return calc.multiply(first, second);
 		case 3:
-			return calc.multiply(first, second);
+			//return calc.multiply(first, second);
 		}
 		return mode;
 	}

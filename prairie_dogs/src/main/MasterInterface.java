@@ -1,17 +1,18 @@
 /**
- * Copyright © 2018
+ * Copyright © 2018<br>
  * 
- * TM:gush 
+ * TM:gush
  * ---
- * 世界の隅っこで人に対してワクワクを与える価値が提供できるように生きています。
+ * 人に対してワクワクを与える価値が提供できるように生きています。
  * ---
  */
 package main;
 
 /**
- * 家計簿アプリケーションで利用する管理マスタのための基本インターフェイス<br>
+ * 家計簿アプリケーションで利用する管理マスタに提供するインターフェイス<br>
  * <p>
- * このインターフェイスを実装するクラスはマスタ系の基本機能を有する<br>
+ * このインターフェイスを実装するクラスは管理マスタの基本機能を有する<br>
+ * 基本機能とは下記の４つ<br>
  * 登録、更新、削除、検索を実装する。<br>
  * </p>
  * 
@@ -23,7 +24,7 @@ public interface MasterInterface {
 	/**
 	 * マスタの登録<br>
 	 * <p>
-	 * 登録を行う
+	 * 新規で項目名に登録を行う
 	 * 
 	 * </p>
 	 * 
@@ -34,7 +35,7 @@ public interface MasterInterface {
 	/**
 	 * マスタの更新<br>
 	 * <p>
-	 * 更新を行う
+	 * 既存の項目名に対して更新を行う
 	 * 
 	 * </p>
 	 * 
@@ -45,7 +46,7 @@ public interface MasterInterface {
 	/**
 	 * マスタの削除<br>
 	 * <p>
-	 * 削除を行う
+	 * 既存の項目名に対して削除を行う
 	 * 
 	 * </p>
 	 * 
@@ -57,11 +58,12 @@ public interface MasterInterface {
 	 * マスタの検索<br>
 	 * <p>
 	 * マスタの検索を行う
+	 * マスタに対して項目名が存在するか検索を行い、存在しなければfalseを返却する
 	 * 
 	 * @param name
 	 * @return 検索結果の名前
 	 */
-	static boolean search(String name) {
+	static boolean isSearch(String name) {
 
 		return false;
 	}
