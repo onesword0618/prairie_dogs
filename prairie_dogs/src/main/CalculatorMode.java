@@ -54,9 +54,9 @@ public class CalculatorMode {
 		case 1:
 			return calc.minus(first, second);
 		case 2:
-			//return calc.multiply(first, second);
+			return calc.mult(first, second);
 		case 3:
-			//return calc.multiply(first, second);
+			return calc.div(first, second);
 		}
 		return mode;
 	}
