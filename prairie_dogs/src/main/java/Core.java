@@ -1,4 +1,4 @@
-package main;
+package main.java;
 
 import java.util.Scanner;
 
@@ -14,8 +14,11 @@ public class Core {
 	 * 
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 
+		ConfigReader conf = new ConfigReader();
+		
+		
 		callStartMessege();
 
 		execCalculation();
@@ -27,8 +30,8 @@ public class Core {
 	 * 
 	 */
 	private static void callStartMessege() {
-		System.out.println(Message.openingGuid.getMessege());
-		System.out.println(Message.selectCalcMode.getMessege());
+		System.out.println();
+		System.out.println(CmnMessage.selectCalcMode.getMessege());
 	}
 
 	/**
@@ -56,9 +59,9 @@ public class Core {
 			int selectMode = calculatorMode.selectModeMessage(inputScannerNumber(scanner));
 
 			// 計算値入力
-			System.out.println(Message.inputGuidFirstArgument.getMessege());
+			System.out.println(CmnMessage.inputGuidFirstArgument.getMessege());
 			firstArgument = inputScannerNumber(scanner);
-			System.out.println(Message.inputGuidSecondArgument.getMessege());
+			System.out.println(CmnMessage.inputGuidSecondArgument.getMessege());
 			secondArgument = inputScannerNumber(scanner);
 
 			// 計算処理
@@ -71,7 +74,7 @@ public class Core {
 			// 計算を終了する場合
 			if (inputContinue == 0) {
 				isContinue = false;
-				System.out.println(Message.guidFinish.getMessege());
+				System.out.println(CmnMessage.guidFinish.getMessege());
 			}
 
 			// 計算処理を継続する場合は前回の計算結果と合算する
@@ -93,8 +96,8 @@ public class Core {
 		/*
 		 * 案内表示文 コンソール画面に計算処理の継続を求める
 		 */
-		System.out.println(Message.isContinue.getMessege());
-		System.out.println(Message.selectIsContinue.getMessege());
+		System.out.println(CmnMessage.isContinue.getMessege());
+		System.out.println(CmnMessage.selectIsContinue.getMessege());
 	}
 
 	/**
@@ -114,8 +117,8 @@ public class Core {
 			checkInputScannerNumber = scanner.nextLine();
 
 			if (!CheckRegex.checkNumber(checkInputScannerNumber)) {
-				System.out.println(Message.inspection.getMessege());
-				System.out.println(Message.reInput.getMessege());
+				System.out.println(CmnMessage.inspection.getMessege());
+				System.out.println(CmnMessage.reInput.getMessege());
 				continue;
 			}
 			break;

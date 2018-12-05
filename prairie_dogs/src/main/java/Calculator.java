@@ -1,4 +1,4 @@
-package main;
+package main.java;
 
 /**
  * 演算処理<br>

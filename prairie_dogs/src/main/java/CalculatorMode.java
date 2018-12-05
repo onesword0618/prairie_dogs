@@ -1,4 +1,4 @@
-package main;
+package main.java;
 
 /**
  * 計算モード選択
@@ -18,19 +18,19 @@ public class CalculatorMode {
 		switch (mode) {
 		// 計算方法：加算
 		case 0:
-			System.out.println(Message.prcsPluss.getMessege());
+			//System.out.println(Message.prcsPluss.getMessege());
 			break;
 		// 計算方法：減算
 		case 1:
-			System.out.println(Message.prcsMinus.getMessege());
+			//System.out.println(Message.prcsMinus.getMessege());
 			break;
 		// 計算方法：乗算
 		case 2:
-			System.out.println(Message.prcsMultiply.getMessege());
+			//System.out.println(Message.prcsMultiply.getMessege());
 			break;
 		// 計算方法：除算
 		case 3:
-			System.out.println(Message.prcsDivided.getMessege());
+			//System.out.println(Message.prcsDivided.getMessege());
 			break;
 		}
 		return mode;

@@ -1,4 +1,4 @@
-package main;
+package main.java;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -23,14 +23,14 @@ public class CsvWriter {
 	 */
 	public void exportCsv(int computation) {
 
-		SystemConfig sys = new SystemConfig();
+		//SystemConfig sys = new SystemConfig();
 
 		LocalDateTime ldt = LocalDateTime.now();
 
 		try {
 			// 出力場所を指定
 			// ユーザディレクトリを取得
-			FileWriter fileWriter = new FileWriter(sys.getUserHomePath() + "/bin/Caluc.csv", true);
+			FileWriter fileWriter = new FileWriter("/bin/Caluc.csv", true);
 			PrintWriter printWriter = new PrintWriter(new BufferedWriter(fileWriter));
 
 			// ヘッダーの指定
@@ -47,7 +47,7 @@ public class CsvWriter {
 			// ファイルクローズ、この時点テキスト作成
 			printWriter.close();
 
-			System.out.println(Message.exportCsv.getMessege());
+			//System.out.println(Message.exportCsv.getMessege());
 
 		} catch (
 

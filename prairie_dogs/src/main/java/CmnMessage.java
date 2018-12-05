@@ -1,4 +1,4 @@
-package main;
+package main.java;
 
 /**
  * メッセージのenum定数
@@ -6,38 +6,33 @@ package main;
  * @author onesword0618
  *
  */
-public enum Message implements ConsoleInterface {
+public enum CmnMessage implements ConsoleInterface {
 
 	/**
 	 * 計算モードを選んでください
 	 */
-	openingGuid("計算モードを選んでください")
+	openingGuid("I01")
 	
 	/**
 	 * 第１引数の整数を入力してください
 	 */
-	,inputGuidFirstArgument("第１引数の整数を入力してください")
+	,inputGuidFirstArgument("I02")
 	
 	/**
 	 * 第２引数の整数を入力してください
 	 */
-	,inputGuidSecondArgument("第２引数の整数を入力してください")
+	,inputGuidSecondArgument("I03")
 	
 	/**
 	 * 計算方式選択 <br>
 	 * 0:加算/ 1:減算/ 2:乗算/ 3:除算
 	 */
+	,selectCalcMode("I04")
 	
-	,selectCalcMode(
-			"0:加算 "
-			+ "/ 1:減算 "
-			+ "/ 2:乗算 "
-			+ "/ 3:除算"
-			)
 	
-	,isContinue("計算処理を終了しますか")
+	,isContinue("I05")
 	
-	,selectIsContinue("0:YES / 1:NO")
+	,selectIsContinue("I06")
 	
 	,guidFInishCalc("計算処理を終了しますか")
 	
@@ -60,11 +55,12 @@ public enum Message implements ConsoleInterface {
 	
 	private final String msg;
 	
-	private Message(String msg) {
+	private CmnMessage(String msg) {		
 		this.msg = msg;
 	}
 	
 	public String getMessege() {
+		
 		return this.msg;
 	}
 }
