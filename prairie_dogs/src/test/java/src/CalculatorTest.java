@@ -1,11 +1,11 @@
-package test.java;
+package test;
 
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
 
 import org.junit.Test;
 
-import main.java.Calculator;
+import main.Calculator;
 
 public class CalculatorTest {
 

@@ -1,4 +1,4 @@
-package main.java;
+package main;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -6,12 +6,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URL;
-import java.util.Enumeration;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
-import java.util.ResourceBundle;
 
 /**
  * 品目マスタ<br>
@@ -33,43 +29,50 @@ public class ItemMaster implements MasterInterface {
 	 * @throws IOException
 	 * 
 	 */
-	public void read() throws Exception {
+	public void mainPrcs() throws IOException {
 		
-		//System.out.println(Message.openingGuid.getMessege());
+		// コンストラクタ
+		mainPrcs();
 		
+		// 初期処理
+		// 設定ファイル読込(プロパティファイル)
+		// ここから格納先を読み込む
+		
+		
+		// 品目マスタCSVファイル読込
+		// 使用者側で品目を編集することができるようにするため
+		// 中身がない場合とあった場合を考慮にいれること
+		// リソースファイル読込
+		// 番号
+		// 登録日付
+		// 品目名
+
+		// 読込内容をコンソールで出力
+		// 件数
+		// 番号
+		// 品目名一覧
+
+		// 1 登録処理
+		// 品目名重複チェック
+		// CSVファイルへ書き込み
+		// 登録結果を一覧出力
+
+		// 2 検索処理
+		// 品目名の存在チェック
+		// 検索結果をコンソールに出力
+
+		// 3 更新処理
+		// 品目名の存在チェック
+		// 上書き入力する品目重複チェック
+		// 更新結果をコンソール出力
+
+		// 4 削除処理
+		// 品目名の存在チェック
+		// 削除確認
+		// CSVファイルからの消込
+		// 削除結果のコンソール出力
+
 	}
-	// 品目マスタCSVファイル読込
-	// 使用者側で品目を編集することができるようにするため
-	// 中身がない場合とあった場合を考慮にいれること
-	// リソースファイル読込
-	// 番号
-	// 登録日付
-	// 品目名
-
-	// 読込内容をコンソールで出力
-	// 件数
-	// 番号
-	// 品目名一覧
-
-	// 1 登録処理
-	// 品目名重複チェック
-	// CSVファイルへ書き込み
-	// 登録結果を一覧出力
-
-	// 2 検索処理
-	// 品目名の存在チェック
-	// 検索結果をコンソールに出力
-
-	// 3 更新処理
-	// 品目名の存在チェック
-	// 上書き入力する品目重複チェック
-	// 更新結果をコンソール出力
-
-	// 4 削除処理
-	// 品目名の存在チェック
-	// 削除確認
-	// CSVファイルからの消込
-	// 削除結果のコンソール出力
 
 	/**
 	 * 初期処理<br>
