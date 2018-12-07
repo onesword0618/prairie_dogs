@@ -5,6 +5,7 @@
  * ---
  * 人に対してワクワクを与える価値が提供できるように生きています。
  * ---
+ * @author Kenichi.I
  */
 package main;
 
@@ -24,7 +25,7 @@ public interface MasterInterface {
 	/**
 	 * マスタの登録<br>
 	 * <p>
-	 * 新規で項目名に登録を行う
+	 * 新規で項目名の登録を行う
 	 * 
 	 * </p>
 	 * 

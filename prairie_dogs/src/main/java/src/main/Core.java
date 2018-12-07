@@ -1,3 +1,12 @@
+/**
+ * Copyright © 2018<br>
+ * 
+ * TM:gush
+ * ---
+ * 人に対してワクワクを与える価値が提供できるように生きています。
+ * ---
+ * @author Kenichi.I
+ */
 package main;
 
 import java.util.Scanner;
@@ -16,19 +25,24 @@ public class Core {
 	 */
 	public static void main(String[] args) {
 
-		callStartMessege();
-
-		execCalculation();
-
-	}
-
-	/**
-	 * 開始案内文表示<br>
-	 * 
-	 */
-	private static void callStartMessege() {
-		System.out.println(Message.openingGuid.getMessege());
-		System.out.println(Message.selectCalcMode.getMessege());
+		// システムファイルを読込
+		readSystemConfig();
+		// 結果は他クラスが保持
+		// メッセージファイルを読込
+		readMessageUtils();
+		// 結果は他クラスが保持
+		// 商品リストを読込
+		// 結果は他クラスが保持
+		// 開始案内文を表示
+		// メッセージはて定数クラスから
+		// 商品リストの中身を整形してコンソールに出力
+		
+		// IOExceptionSS
+		// 案内文表示
+		// 管理モードかカレンダーモードかは選択肢によって決定
+		// 設定項目表示
+		
+		
 	}
 
 	/**
@@ -64,7 +78,7 @@ public class Core {
 			// 計算処理
 			calculatorMode.callCalculator(selectMode, firstArgument, secondArgument);
 
-			callContinueQuestionMessege();
+			//callContinueQuestionMessege();
 
 			int inputContinue = inputScannerNumber(scanner);
 
@@ -83,18 +97,6 @@ public class Core {
 
 		// テキスト・スキャナーを閉じる。
 		scanner.close();
-	}
-
-	/**
-	 * 継続確認案内<br>
-	 * 
-	 */
-	private static void callContinueQuestionMessege() {
-		/*
-		 * 案内表示文 コンソール画面に計算処理の継続を求める
-		 */
-		System.out.println(Message.isContinue.getMessege());
-		System.out.println(Message.selectIsContinue.getMessege());
 	}
 
 	/**
@@ -136,4 +138,24 @@ public class Core {
 		cw.exportCsv(sumCalculate);
 	}
 
+
+	/**
+	 * システム設定ファイル読込
+	 * system.properties
+	 * 
+	 */
+	private static void readSystemConfig() {
+		
+	}
+	
+	/**
+	 * メッセージリソース読込
+	 * メッセージファイルを読む
+	 * 
+	 */
+	private static void readMessageUtils() {
+		
+		
+		
+	}
 }

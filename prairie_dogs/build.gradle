@@ -6,6 +6,7 @@
 
  /**
  * Java プラグイン
+ *
  * compileJava javacを使って製品Javaソースファイルをコンパイルする
  * processResources 製品リソースを製品クラスディレクトリにコピーする
  * classes 製品クラスディレクトリを構築する
@@ -20,6 +21,7 @@ apply plugin:'java'
 
  /**
  * eclipse プラグイン
+ *
  * eclipse Eclipseの全ての設定ファイルを生成します。
  * cleanEclipse Eclipseの全ての設定ファイルを削除します。
  *
@@ -28,31 +30,34 @@ apply plugin:'eclipse'
 
  /**
  * application プラグイン
+ *
  * run アプリケーションを実行
- * startScripts プロジェクトを JVM アプリケーションとして実行するための OS 依存スクリプトを生成します。
+ * startScripts プロジェクトを JVM アプリケーションとして実行するためのOS依存スクリプトを生成します。
  *
  */
 apply plugin:'application'
 
 /*
-*
-*
+* ライブラリ取得先リポジトリ
+* 設定したリポジトリからライブラリを取得することになる。
 *
 */
 repositories {
-    // Use jcenter for resolving your dependencies.
-    // You can declare any Maven/Ivy/file repository here.
     jcenter()
 }
-
+/*
+* 依存関係の解決
+*
+* リポジトリに登録してあれば、指定したライブラリのバージョン情報を元にライブラリをダウンロードする
+* ライブラリ間で依存関係が生じている場合は、順番を指定しておく必要がある。
+*
+*/
 dependencies {
 
-    // This dependency is used internally, and not exposed to consumers on their own compile classpath.
-    implementation 'com.google.guava:guava:26.0-jre'
+     implementation 'com.google.guava:guava:26.0-jre'
 
-    // Use JUnit test framework
-    testImplementation 'junit:junit:4.12'
+     testImplementation 'junit:junit:4.12'
 }
 
-// Define the main class for the application
+// アプリケーションとしてどのクラスから起点にスタートするかを決める。
 mainClassName = 'Core'
