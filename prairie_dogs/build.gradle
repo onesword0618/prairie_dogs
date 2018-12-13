@@ -1,63 +1,27 @@
-/**
- * 当プロジェクトのbuld.gradle
- *
- * @author onesword0618
- */
-
- /**
- * Java プラグイン
- *
- * compileJava javacを使って製品Javaソースファイルをコンパイルする
- * processResources 製品リソースを製品クラスディレクトリにコピーする
- * classes 製品クラスディレクトリを構築する
- * compileTestJava avacを使ってテストJavaソースファイルをコンパイルする
- * jar JARファイルを構築する
- * javadoc Javadocを使って製品JavaソースのAPIドキュメントを生成する
- * test JUnitかTestNGを使ってユニットテストを実行する
- * clean プロジェクトのビルドディレクトリを削除する
- *
- */
-apply plugin:'java'
-
- /**
- * eclipse プラグイン
- *
- * eclipse Eclipseの全ての設定ファイルを生成します。
- * cleanEclipse Eclipseの全ての設定ファイルを削除します。
- *
- */
-apply plugin:'eclipse'
-
- /**
- * application プラグイン
- *
- * run アプリケーションを実行
- * startScripts プロジェクトを JVM アプリケーションとして実行するためのOS依存スクリプトを生成します。
- *
- */
-apply plugin:'application'
-
 /*
-* ライブラリ取得先リポジトリ
-* 設定したリポジトリからライブラリを取得することになる。
+* 当プロジェクトのbuild.grdle
+* @auter onwsword0618
 *
 */
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
 repositories {
-    jcenter()
+  jcenter()
 }
-/*
-* 依存関係の解決
-*
-* リポジトリに登録してあれば、指定したライブラリのバージョン情報を元にライブラリをダウンロードする
-* ライブラリ間で依存関係が生じている場合は、順番を指定しておく必要がある。
-*
-*/
+
 dependencies {
-
-     implementation 'com.google.guava:guava:26.0-jre'
-
-     testImplementation 'junit:junit:4.12'
+  implementation 'com.google.guava:guava:26.0-jre'
+  testImplementation 'junit:junit:4.12'
 }
 
-// アプリケーションとしてどのクラスから起点にスタートするかを決める。
-mainClassName = 'Core'
+// 初期ディレクトリ作成
+task initDirs {
+    doLast {
+      sourceSets.all {
+        java.srcDirs*.mkdirs()
+        resources.srcDirs*.mkdirs()
+      }
+    }
+}
