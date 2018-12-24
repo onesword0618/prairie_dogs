@@ -3,7 +3,6 @@ package jp.gushed;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;

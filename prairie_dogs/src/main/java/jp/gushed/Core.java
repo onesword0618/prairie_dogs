@@ -18,9 +18,9 @@ public class Core {
 
 		try {
 
-			PropertiesReader pr = new PropertiesReader();
-
-			System.out.println(pr.readResource(GuideMessageCnst.openingGuidMessage.getMessage()));
+			String propertiesName = "message.properties";
+			
+			PropertiesReader.getInstance(propertiesName).getResource(GuideMessageCnst.openingGuidMessage.getMessage());
 			
 		} catch (IOException e) {
 			System.out.println("呼び出し失敗");
