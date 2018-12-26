@@ -21,11 +21,11 @@ public class PropertiesReader implements ResourcesReaderInterface {
 
 	// プロパティリストが見つからない場合のデフォルト値
 	private static String NONE = "NONE";
-	
+
+	// プロパティクラスのインスタンスを生成
 	private static Properties properties = new Properties();
-	// private static String propertiesPaths = "message.properties";
-	
-	// インスタンスを生成
+
+	// このクラスのインスタンスを生成
 	private static PropertiesReader propertiesReader = new PropertiesReader();
 
 	// デフォルトコンストラクタの生成
@@ -34,6 +34,7 @@ public class PropertiesReader implements ResourcesReaderInterface {
 
 	/**
 	 * PropertiesReaderのインスタンスを生成する
+	 * 
 	 * @param propertiesName プロパティファイル名
 	 * @return
 	 * @throws IOException
@@ -45,9 +46,12 @@ public class PropertiesReader implements ResourcesReaderInterface {
 
 	/**
 	 * プロパティファイル生成
+	 * <p>
+	 * 引数で渡されたプロパティファイル名から、ファイルパスを合成し、存在すれば、その中身を取得する<br>
 	 * 
-	 * @param propertiesFile
-	 * @return
+	 * @throws IOException 対象ファイルに問題が起こった場合
+	 * @param propertiesFile ファイル名
+	 * @return プロパティファイルに格納している値
 	 */
 	private static PropertiesReader createPropertiesReader(String propertiesFile) throws IOException {
 
@@ -56,23 +60,24 @@ public class PropertiesReader implements ResourcesReaderInterface {
 
 		// リソースファイルの存在チェック
 		try {
-		 isResourceFile(resourcesFilePath);
-			
-		} catch(IOException io) {
+			isResourceFile(resourcesFilePath);
+			// 存在しない場合
+		} catch (IOException io) {
+			// エラー詳細を取得する
 			io.getStackTrace();
 		}
 		return PropertiesReader.propertiesReader;
 	}
-	
+
 	// プロパティファイルの存在チェック
 	private static boolean isResourceFile(String resourcesFilePath) throws IOException {
-		
+
 		BufferedReader bufferedReader = Files.newBufferedReader(Paths.get(resourcesFilePath));
-		
+
 		try {
 			properties.load(bufferedReader);
-		} catch(IOException io) {
-			//TODO メッセージクラス：「読込に失敗しました。」
+		} catch (IOException io) {
+			// TODO メッセージクラス：「読込に失敗しました。」
 			System.out.println(String.format("読込に失敗しました", bufferedReader));
 			return false;
 		}
@@ -91,6 +96,6 @@ public class PropertiesReader implements ResourcesReaderInterface {
 	@Override
 	public String getResource(String key) {
 
-		return properties.getProperty(key,NONE);
+		return properties.getProperty(key, NONE);
 	}
 }
