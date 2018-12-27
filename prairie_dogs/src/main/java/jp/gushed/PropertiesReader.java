@@ -9,7 +9,8 @@ import java.util.Properties;
 /**
  * プロパティファイル読込<br>
  * <p>
- * 指定されたプロパティファイルを読込、プロパティファイルに格納された値を利用する
+ * 
+ * 指定されたプロパティファイルを読込、プロパティファイルに格納された値を返却する。
  * 
  * @author onesword0618
  *
@@ -33,11 +34,16 @@ public class PropertiesReader implements ResourcesReaderInterface {
 	}
 
 	/**
-	 * PropertiesReaderのインスタンスを生成する
+	 * PropertiesReaderのインスタンスを生成する<br>
+	 * <p>
+	 * 
+	 * プロパティファイル名を引数に渡して該当ディレクトリに存在するかチェック。<br>
+	 * trueの場合：PropertiesReaderのインスタンスを生成する<br>
+	 * falseの場合：入出力エラー
 	 * 
 	 * @param propertiesName プロパティファイル名
-	 * @return
-	 * @throws IOException
+	 * @return プロパティファイル
+	 * @throws IOException 渡されたプロパティファイル名がなかったらエラー
 	 */
 	public static PropertiesReader getInstance(String propertiesName) throws IOException {
 
@@ -47,29 +53,45 @@ public class PropertiesReader implements ResourcesReaderInterface {
 	/**
 	 * プロパティファイル生成
 	 * <p>
-	 * 引数で渡されたプロパティファイル名から、ファイルパスを合成し、存在すれば、その中身を取得する<br>
 	 * 
-	 * @throws IOException 対象ファイルに問題が起こった場合
-	 * @param propertiesFile ファイル名
-	 * @return プロパティファイルに格納している値
+	 * 引数で渡されたプロパティファイル名から、ファイルパスを合成し、存在すれば、その中身を取得する<br>
+	 * 読み込めない場合は、入出力エラー
+	 * 
+	 * @param propertiesFile プロパティファイル名
+	 * @return PropertiesReaderのインスタンス
+	 * @throws IOException
 	 */
-	private static PropertiesReader createPropertiesReader(String propertiesFile) throws IOException {
+	private static PropertiesReader createPropertiesReader(String propertiesFileName) throws IOException {
 
 		// ファイルパスを合成
-		String resourcesFilePath = RESOURCES_DIR_PATHS + propertiesFile;
+		String resourcesFilePath = RESOURCES_DIR_PATHS + propertiesFileName;
 
-		// リソースファイルの存在チェック
+		// プロパティファイルの存在チェック
 		try {
 			isResourceFile(resourcesFilePath);
 			// 存在しない場合
 		} catch (IOException io) {
-			// エラー詳細を取得する
 			io.getStackTrace();
 		}
+		// インスタンスを返却
 		return PropertiesReader.propertiesReader;
+
 	}
 
-	// プロパティファイルの存在チェック
+	/**
+	 * プロパティファイルの存在チェック
+	 * <p>
+	 * 
+	 * 引数で渡されたパスにプロパティファイルが存在するかを評価する<br>
+	 * <li>trueの場合:読み込まれたプロパティファイルが返却される</li>
+	 * 
+	 * <li>falseの場合:入出力エラー</li>
+	 * <p>
+	 * 
+	 * @param resourcesFilePath
+	 * @return
+	 * @throws IOException
+	 */
 	private static boolean isResourceFile(String resourcesFilePath) throws IOException {
 
 		BufferedReader bufferedReader = Files.newBufferedReader(Paths.get(resourcesFilePath));
@@ -87,8 +109,10 @@ public class PropertiesReader implements ResourcesReaderInterface {
 	/**
 	 * リソース取得確認
 	 * <p>
-	 * プロパティのキー値を渡して合致する設定値を取得する
-	 * </p>
+	 * 
+	 * 引数のkey値を評価して合致する設定値を返却する<br>
+	 * 渡された引数が存在しない場合はデフォルト値を返却する<br>
+	 * <p>
 	 * 
 	 * @param key 設定値に紐付いている値
 	 * @return リソースに格納している設定値

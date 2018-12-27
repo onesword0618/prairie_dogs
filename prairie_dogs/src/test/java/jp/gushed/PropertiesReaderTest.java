@@ -11,8 +11,10 @@ public class PropertiesReaderTest {
 
 		// 期待値
 		String expected = "家計簿アプリケーションへようこそ";
-		String actual = null;
+		
 		// SetUp -初期化
+		String actual = null;
+		
 		try {
 			// Exercise -実行
 			actual = PropertiesReader.getInstance("message.properties").getResource("G01");

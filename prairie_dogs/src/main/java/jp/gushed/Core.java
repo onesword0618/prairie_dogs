@@ -17,7 +17,7 @@ public class Core {
 		lg.getLog();
 
 		try {
-
+			//TODO enum定数クラスを生成しておく？
 			String propertiesName = "message.properties";
 			
 			PropertiesReader.getInstance(propertiesName).getResource(GuideMessageCnst.openingGuidMessage.getMessage());
