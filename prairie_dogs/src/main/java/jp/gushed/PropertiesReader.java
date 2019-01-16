@@ -3,107 +3,124 @@ package jp.gushed;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Optional;
 import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
- * プロパティファイル読込<br>
+ * <h1>プロパティファイル読込</h1><br>
  * <p>
- * 
- * 指定されたプロパティファイルを読込、プロパティファイルに格納された値を返却する。
+ * <h2>目的:外部リソース(プロパティファイル)の読込</h2><br>
+ * <p>
+ * 指定されたプロパティファイルを読込、渡されたkey値に対するメッセージを返却する<br>
+ * <p>
  * 
  * @author onesword0618
  *
  */
-public class PropertiesReader implements ResourcesReaderInterface {
+public class PropertiesReader {
 
-	// リソースファイルのディレクトリパス
+	// リソースを格納するディレクトリパス
 	private static String RESOURCES_DIR_PATHS = "src/main/resources/";
 
 	// プロパティリストが見つからない場合のデフォルト値
-	private static String NONE = "NONE";
+	private static String NO_MESSAGE_LIST = "E01";
 
-	// プロパティクラスのインスタンスを生成
+	// プロパティファイル名
+	private static String propertiesFileName;
+
+	// Propertiesのインスタンスを生成
 	private static Properties properties = new Properties();
 
-	// このクラスのインスタンスを生成
-	private static PropertiesReader propertiesReader = new PropertiesReader();
+	// PropertiesReaderのインスタンスを生成
+	private static PropertiesReader propertiesReader = new PropertiesReader(propertiesFileName);
 
-	// デフォルトコンストラクタの生成
-	private PropertiesReader() {
+	/**
+	 * <h2>プロパティ情報の読込</h2><br>
+	 * <p>
+	 * 引数で渡されたプロパティファイル名を元に読込処理を実行する<br>
+	 * <p>
+	 * 
+	 * @param propertiesFileName プロパティファイル名
+	 * @exception IOException プロパティファイル名の不備
+	 */
+	private PropertiesReader(String propertiesFileName) {
+
+		// プロパティファイルを読み込む
+		try {
+			loadProperties(propertiesFileName);
+		} catch (IOException e) {
+			System.out.println("propertiesFileName" + "の処理に問題が起こりました");
+			e.printStackTrace();
+		}
 	}
 
 	/**
-	 * PropertiesReaderのインスタンスを生成する<br>
+	 * <h2>PropertiesReaderのインスタンス生成</h2><br>
+	 * <p>
+	 * プロパティファイル名を渡してPropertiesReaderのインスタンス生成を行う<br>
 	 * <p>
 	 * 
-	 * プロパティファイル名を引数に渡して該当ディレクトリに存在するかチェック。<br>
-	 * trueの場合：PropertiesReaderのインスタンスを生成する<br>
-	 * falseの場合：入出力エラー
+	 * @see PropertiesReader(String propertiesFileName)
 	 * 
 	 * @param propertiesName プロパティファイル名
-	 * @return プロパティファイル
-	 * @throws IOException 渡されたプロパティファイル名がなかったらエラー
+	 * @return PropertiesReaderのインスタンス
 	 */
-	public static PropertiesReader getInstance(String propertiesName) throws IOException {
+	public static PropertiesReader getInstance(String propertiesFileName) {
 
-		return createPropertiesReader(propertiesName);
+		return propertiesReader;
+
 	}
 
 	/**
-	 * プロパティファイル生成
+	 * <h2>プロパティファイルの読込処理</h2>
 	 * <p>
 	 * 
-	 * 引数で渡されたプロパティファイル名から、ファイルパスを合成し、存在すれば、その中身を取得する<br>
-	 * 読み込めない場合は、入出力エラー
+	 * <h3>引数で渡されたプロパティファイル名でリソースディレクトリパスを合成する<br>
+	 * 対象が読込可能な状態ならば、その中身を取得する<br>
+	 * 読み込めない場合は、入出力エラーをthrowsする<br>
+	 * </h3>
 	 * 
-	 * @param propertiesFile プロパティファイル名
+	 * @param propertiesFileName プロパティファイル名
 	 * @return PropertiesReaderのインスタンス
 	 * @throws IOException
 	 */
-	private static PropertiesReader createPropertiesReader(String propertiesFileName) throws IOException {
+	private static PropertiesReader loadProperties(String propertiesFileName) throws IOException {
 
-		// ファイルパスを合成
-		String resourcesFilePath = RESOURCES_DIR_PATHS + propertiesFileName;
-
-		// プロパティファイルの存在チェック
-		try {
-			isResourceFile(resourcesFilePath);
-			// 存在しない場合
-		} catch (IOException io) {
-			io.getStackTrace();
+		// TODO チェック処理を別途まとめること
+		// 引数が空かどうかを判定
+		if (propertiesFileName.isEmpty()) {
+			System.out.println(BaseMessageCnst.notFindParams);
 		}
-		// インスタンスを返却
+		;
+		// TODO 拡張子が適切かどうかを判定
+		boolean isMachesType = Pattern.matches("*.properties", propertiesFileName);
+
+		if (!isMachesType) {
+			System.out.println(BaseMessageCnst.notCorrectTypeFile);
+		}
+
+		// TODO もっと良い書き方があるはずなので調査を行うこと
+		// リソースディレクトリパスとパラメタを合成
+		Path resourcesFilePath = Paths.get(RESOURCES_DIR_PATHS + propertiesFileName);
+
+		// TODO 読込可能かどうかを判定
+		// 合成したパスのリソースを読み込むことができるか
+		if (!Files.isReadable(resourcesFilePath)) {
+			System.out.println(BaseMessageCnst.canNotReadTargetResourceFiles);
+		}
+		;
+
+		// ストリーム形式で読み込んでいる
+		BufferedReader bufferedReader = Files.newBufferedReader(resourcesFilePath);
+		// 実際に読み込んでいるメソッド、このあとハッシュマップ形式でメモリ上に格納されている
+		properties.load(bufferedReader);
+
 		return PropertiesReader.propertiesReader;
 
-	}
-
-	/**
-	 * プロパティファイルの存在チェック
-	 * <p>
-	 * 
-	 * 引数で渡されたパスにプロパティファイルが存在するかを評価する<br>
-	 * <li>trueの場合:読み込まれたプロパティファイルが返却される</li>
-	 * 
-	 * <li>falseの場合:入出力エラー</li>
-	 * <p>
-	 * 
-	 * @param resourcesFilePath
-	 * @return
-	 * @throws IOException
-	 */
-	private static boolean isResourceFile(String resourcesFilePath) throws IOException {
-
-		BufferedReader bufferedReader = Files.newBufferedReader(Paths.get(resourcesFilePath));
-
-		try {
-			properties.load(bufferedReader);
-		} catch (IOException io) {
-			// TODO メッセージクラス：「読込に失敗しました。」
-			System.out.println(String.format("読込に失敗しました", bufferedReader));
-			return false;
-		}
-		return true;
 	}
 
 	/**
@@ -117,9 +134,8 @@ public class PropertiesReader implements ResourcesReaderInterface {
 	 * @param key 設定値に紐付いている値
 	 * @return リソースに格納している設定値
 	 */
-	@Override
-	public String getResource(String key) {
+	public String getMessage(String key) {
 
-		return properties.getProperty(key, NONE);
+		return properties.getProperty(key, NO_MESSAGE_LIST);
 	}
 }
