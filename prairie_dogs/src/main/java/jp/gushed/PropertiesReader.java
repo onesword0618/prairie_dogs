@@ -5,10 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Optional;
 import java.util.Properties;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * <h1>プロパティファイル読込</h1><br>
@@ -29,17 +26,11 @@ public class PropertiesReader {
 	// プロパティリストが見つからない場合のデフォルト値
 	private static String NO_MESSAGE_LIST = "E01";
 
-	// プロパティファイル名
-	private static String propertiesFileName;
-
 	// Propertiesのインスタンスを生成
 	private static Properties properties = new Properties();
 
-	// PropertiesReaderのインスタンスを生成
-	private static PropertiesReader propertiesReader = new PropertiesReader(propertiesFileName);
-
 	/**
-	 * <h2>プロパティ情報の読込</h2><br>
+	 * <h2>プロパティ情報の読込処理</h2>
 	 * <p>
 	 * 引数で渡されたプロパティファイル名を元に読込処理を実行する<br>
 	 * <p>
@@ -48,35 +39,18 @@ public class PropertiesReader {
 	 * @exception IOException プロパティファイル名の不備
 	 */
 	private PropertiesReader(String propertiesFileName) {
-
-		// プロパティファイルを読み込む
+		// 引数に不整合が合った場合は入出力エラーを出力する
 		try {
 			loadProperties(propertiesFileName);
 		} catch (IOException e) {
+			// 下記のメッセージの引数との合成方法及び出力方法は検討する
 			System.out.println("propertiesFileName" + "の処理に問題が起こりました");
 			e.printStackTrace();
 		}
 	}
 
 	/**
-	 * <h2>PropertiesReaderのインスタンス生成</h2><br>
-	 * <p>
-	 * プロパティファイル名を渡してPropertiesReaderのインスタンス生成を行う<br>
-	 * <p>
-	 * 
-	 * @see PropertiesReader(String propertiesFileName)
-	 * 
-	 * @param propertiesName プロパティファイル名
-	 * @return PropertiesReaderのインスタンス
-	 */
-	public static PropertiesReader getInstance(String propertiesFileName) {
-
-		return propertiesReader;
-
-	}
-
-	/**
-	 * <h2>プロパティファイルの読込処理</h2>
+	 * <h2>プロパティファイルの読込実行</h2>
 	 * <p>
 	 * 
 	 * <h3>引数で渡されたプロパティファイル名でリソースディレクトリパスを合成する<br>
@@ -88,20 +62,20 @@ public class PropertiesReader {
 	 * @return PropertiesReaderのインスタンス
 	 * @throws IOException
 	 */
-	private static PropertiesReader loadProperties(String propertiesFileName) throws IOException {
+	private static void loadProperties(String propertiesFileName) throws IOException {
 
-		// TODO チェック処理を別途まとめること
 		// 引数が空かどうかを判定
-		if (propertiesFileName.isEmpty()) {
+		if (ValueInputVerify.getInstance().isEmpty(propertiesFileName)) {
 			System.out.println(BaseMessageCnst.notFindParams);
 		}
 		;
-		// TODO 拡張子が適切かどうかを判定
-		boolean isMachesType = Pattern.matches("*.properties", propertiesFileName);
 
-		if (!isMachesType) {
-			System.out.println(BaseMessageCnst.notCorrectTypeFile);
-		}
+		// 拡張子が適切かどうかを判定
+		//boolean isMachesType = Pattern.matches("*.properties", propertiesFileName);
+
+		// if (!isMachesType) {
+		// System.out.println(BaseMessageCnst.notCorrectTypeFile);
+		// }
 
 		// TODO もっと良い書き方があるはずなので調査を行うこと
 		// リソースディレクトリパスとパラメタを合成
@@ -119,7 +93,22 @@ public class PropertiesReader {
 		// 実際に読み込んでいるメソッド、このあとハッシュマップ形式でメモリ上に格納されている
 		properties.load(bufferedReader);
 
-		return PropertiesReader.propertiesReader;
+	}
+
+	/**
+	 * <h2>PropertiesReaderのインスタンス生成</h2><br>
+	 * <p>
+	 * プロパティファイル名を渡してPropertiesReaderのインスタンス生成を行う<br>
+	 * <p>
+	 * 
+	 * @see PropertiesReader(String propertiesFileName)
+	 * 
+	 * @param propertiesName プロパティファイル名
+	 * @return PropertiesReaderのインスタンス
+	 */
+	public static PropertiesReader getInstance(String propertiesFileName) {
+
+		return new PropertiesReader(propertiesFileName);
 
 	}
 

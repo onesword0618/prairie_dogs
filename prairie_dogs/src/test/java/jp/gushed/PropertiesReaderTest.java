@@ -17,7 +17,7 @@ public class PropertiesReaderTest {
 		
 		try {
 			// Exercise -実行
-			actual = PropertiesReader.getInstance("message.properties").getResource("G01");
+			actual = PropertiesReader.getInstance("message.properties").getMessage("G01");
 		} catch (Exception e) {
 			fail("呼び出し失敗");
 		}
