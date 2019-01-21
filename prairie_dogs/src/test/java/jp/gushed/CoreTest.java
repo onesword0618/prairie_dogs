@@ -13,7 +13,7 @@ public class CoreTest {
 		// 期待値
 		String expected = "Call Class OK";
 		// Exercise -実行
-		String actual = Core.getCall();
+		String actual = MainProcess.getCall();
 		// Verify -検証
 		assertThat(actual, is(expected));
 	}

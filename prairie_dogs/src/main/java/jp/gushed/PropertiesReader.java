@@ -23,7 +23,7 @@ public class PropertiesReader {
 	// リソースを格納するディレクトリパス
 	private static String RESOURCES_DIR_PATHS = "src/main/resources/";
 
-	// プロパティリストが見つからない場合のデフォルト値
+	// key値が見つからない場合のデフォルト値
 	private static String NO_MESSAGE_LIST = "E01";
 
 	// Propertiesのインスタンスを生成
@@ -36,14 +36,14 @@ public class PropertiesReader {
 	 * <p>
 	 * 
 	 * @param propertiesFileName プロパティファイル名
-	 * @exception IOException プロパティファイル名の不備
+	 * @exception IOException 引数のプロパティファイル名に不備があった場合、入出力エラー
 	 */
 	private PropertiesReader(String propertiesFileName) {
 		// 引数に不整合が合った場合は入出力エラーを出力する
 		try {
 			loadProperties(propertiesFileName);
 		} catch (IOException e) {
-			// 下記のメッセージの引数との合成方法及び出力方法は検討する
+			// TODO 下記のメッセージの引数との合成方法及び出力方法は検討する
 			System.out.println("propertiesFileName" + "の処理に問題が起こりました");
 			e.printStackTrace();
 		}
@@ -54,34 +54,29 @@ public class PropertiesReader {
 	 * <p>
 	 * 
 	 * <h3>引数で渡されたプロパティファイル名でリソースディレクトリパスを合成する<br>
-	 * 対象が読込可能な状態ならば、その中身を取得する<br>
+	 * </h3> 対象が読込可能な状態ならば、その中身を取得する<br>
 	 * 読み込めない場合は、入出力エラーをthrowsする<br>
-	 * </h3>
 	 * 
 	 * @param propertiesFileName プロパティファイル名
-	 * @return PropertiesReaderのインスタンス
 	 * @throws IOException
 	 */
 	private static void loadProperties(String propertiesFileName) throws IOException {
 
 		// 引数が空かどうかを判定
-		if (ValueInputVerify.getInstance().isEmpty(propertiesFileName)) {
+		if (InputValueVerify.getInstance().isEmpty(propertiesFileName)) {
 			System.out.println(BaseMessageCnst.notFindParams);
 		}
 		;
 
+		// TODO FIX
 		// 拡張子が適切かどうかを判定
-		//boolean isMachesType = Pattern.matches("*.properties", propertiesFileName);
+		//if (!ValueInputVerify.getInstance().isType(propertiesFileName)) {
+		//	System.out.println(BaseMessageCnst.notCorrectTypeFile);
+		//}
 
-		// if (!isMachesType) {
-		// System.out.println(BaseMessageCnst.notCorrectTypeFile);
-		// }
-
-		// TODO もっと良い書き方があるはずなので調査を行うこと
 		// リソースディレクトリパスとパラメタを合成
 		Path resourcesFilePath = Paths.get(RESOURCES_DIR_PATHS + propertiesFileName);
 
-		// TODO 読込可能かどうかを判定
 		// 合成したパスのリソースを読み込むことができるか
 		if (!Files.isReadable(resourcesFilePath)) {
 			System.out.println(BaseMessageCnst.canNotReadTargetResourceFiles);
