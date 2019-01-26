@@ -8,7 +8,7 @@ package jp.gushed;
  * @author onesword0618
  *
  */
-public enum BaseMessageCnst {
+public enum BaseMessageCnst implements MessageInterface{
 	// パラメタの値がありません
 	notFindParams("パラメタの値がありません")
 

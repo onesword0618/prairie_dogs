@@ -24,7 +24,7 @@ public class PropertiesReader {
 	private static String RESOURCES_DIR_PATHS = "src/main/resources/";
 
 	// key値が見つからない場合のデフォルト値
-	private static String NO_MESSAGE_LIST = "E01";
+	private static String NO_MESSAGE = "E01";
 
 	// Propertiesのインスタンスを生成
 	private static Properties properties = new Properties();
@@ -120,6 +120,6 @@ public class PropertiesReader {
 	 */
 	public String getMessage(String key) {
 
-		return properties.getProperty(key, NO_MESSAGE_LIST);
+		return properties.getProperty(key, NO_MESSAGE);
 	}
 }
