@@ -15,7 +15,7 @@ public class MainProcess {
 		//TODO enum定数クラスを生成しておく？
 		String propertiesName = "message.properties";
 		
-		System.out.println((PropertiesReader.getInstance(propertiesName).getMessage(GuideMessageCnst.openingGuidMessage.getMessage())));
+		//System.out.println((PropertiesReader.getInstance(propertiesName).getMessage(GuideMessageCnst.openingGuidMessage.getMessage())));
 		
 		getCall();
 	}

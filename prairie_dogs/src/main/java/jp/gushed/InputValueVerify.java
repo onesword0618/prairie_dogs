@@ -1,5 +1,7 @@
 package jp.gushed;
 
+import java.nio.file.Path;
+
 /**
  * 入力値不整合確認
  * <p>
@@ -34,5 +36,10 @@ public class InputValueVerify {
 	 */
 	public boolean isType(String typeFile) {
 		return typeFile.matches("*.properties");
+	}
+
+	public boolean isEmpty(Path filePath) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

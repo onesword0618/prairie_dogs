@@ -3,7 +3,6 @@ package jp.gushed;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Properties;
 
@@ -20,13 +19,10 @@ import java.util.Properties;
  */
 public class PropertiesReader {
 
-	// リソースを格納するディレクトリパス
-	private static String RESOURCES_DIR_PATHS = "src/main/resources/";
-
 	// key値が見つからない場合のデフォルト値
 	private static String NO_MESSAGE = "E01";
 
-	// Propertiesのインスタンスを生成
+	// Propertiesのインスタンス生成
 	private static Properties properties = new Properties();
 
 	/**
@@ -39,9 +35,12 @@ public class PropertiesReader {
 	 * @exception IOException 引数のプロパティファイル名に不備があった場合、入出力エラー
 	 */
 	private PropertiesReader(String propertiesFileName) {
+
+		// ファイルパスを取得する
+		String filePath = PropertiesReader.class.getClassLoader().getResource(propertiesFileName).getPath();
 		// 引数に不整合が合った場合は入出力エラーを出力する
 		try {
-			loadProperties(propertiesFileName);
+			loadProperties(filePath);
 		} catch (IOException e) {
 			// TODO 下記のメッセージの引数との合成方法及び出力方法は検討する
 			System.out.println("propertiesFileName" + "の処理に問題が起こりました");
@@ -60,31 +59,16 @@ public class PropertiesReader {
 	 * @param propertiesFileName プロパティファイル名
 	 * @throws IOException
 	 */
-	private static void loadProperties(String propertiesFileName) throws IOException {
+	private static void loadProperties(String filePath) throws IOException {
 
 		// 引数が空かどうかを判定
-		if (InputValueVerify.getInstance().isEmpty(propertiesFileName)) {
+		if (InputValueVerify.getInstance().isEmpty(filePath)) {
 			System.out.println(BaseMessageCnst.notFindParams);
 		}
 		;
 
-		// TODO FIX
-		// 拡張子が適切かどうかを判定
-		//if (!ValueInputVerify.getInstance().isType(propertiesFileName)) {
-		//	System.out.println(BaseMessageCnst.notCorrectTypeFile);
-		//}
-
-		// リソースディレクトリパスとパラメタを合成
-		Path resourcesFilePath = Paths.get(RESOURCES_DIR_PATHS + propertiesFileName);
-
-		// 合成したパスのリソースを読み込むことができるか
-		if (!Files.isReadable(resourcesFilePath)) {
-			System.out.println(BaseMessageCnst.canNotReadTargetResourceFiles);
-		}
-		;
-
 		// ストリーム形式で読み込んでいる
-		BufferedReader bufferedReader = Files.newBufferedReader(resourcesFilePath);
+		BufferedReader bufferedReader = Files.newBufferedReader(Paths.get(filePath));
 		// 実際に読み込んでいるメソッド、このあとハッシュマップ形式でメモリ上に格納されている
 		properties.load(bufferedReader);
 
