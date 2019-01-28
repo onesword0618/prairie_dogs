@@ -4,7 +4,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-public class PropertiesReaderTest {
+public class ConfigReaderTest {
 
 	@Test
 	public void G01の取得確認() {
@@ -17,7 +17,7 @@ public class PropertiesReaderTest {
 		
 		try {
 			// Exercise -実行
-			actual = PropertiesReader.getInstance("message.properties").getMessage("G01");
+			actual = ConfigReader.getInstance("message.properties").getMessage("G01");
 		} catch (Exception e) {
 			fail("呼び出し失敗");
 		}
@@ -37,7 +37,7 @@ public class PropertiesReaderTest {
 		
 		try {
 			// Exercise -実行
-			actual = PropertiesReader.getInstance("messageTestIsOK.properties").getMessage("G01");
+			actual = ConfigReader.getInstance("messageTestIsOK.properties").getMessage("G01");
 		} catch (Exception e) {
 			fail("呼び出し失敗");
 		}

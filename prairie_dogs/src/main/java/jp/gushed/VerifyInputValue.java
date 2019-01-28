@@ -11,11 +11,11 @@ import java.nio.file.Path;
  * @author onesword0618
  *
  */
-public class InputValueVerify {
+public class VerifyInputValue {
 
 	
-	public static InputValueVerify getInstance() {
-		return new InputValueVerify();
+	public static VerifyInputValue getInstance() {
+		return new VerifyInputValue();
 	}
 	
 	/**

@@ -17,7 +17,7 @@ import java.util.Properties;
  * @author onesword0618
  *
  */
-public class PropertiesReader {
+public class ConfigReader {
 
 	// key値が見つからない場合のデフォルト値
 	private static String NO_MESSAGE = "E01";
@@ -34,10 +34,10 @@ public class PropertiesReader {
 	 * @param propertiesFileName プロパティファイル名
 	 * @exception IOException 引数のプロパティファイル名に不備があった場合、入出力エラー
 	 */
-	private PropertiesReader(String propertiesFileName) {
+	private ConfigReader(String propertiesFileName) {
 
 		// ファイルパスを取得する
-		String filePath = PropertiesReader.class.getClassLoader().getResource(propertiesFileName).getPath();
+		String filePath = ConfigReader.class.getClassLoader().getResource(propertiesFileName).getPath();
 		// 引数に不整合が合った場合は入出力エラーを出力する
 		try {
 			loadProperties(filePath);
@@ -62,7 +62,7 @@ public class PropertiesReader {
 	private static void loadProperties(String filePath) throws IOException {
 
 		// 引数が空かどうかを判定
-		if (InputValueVerify.getInstance().isEmpty(filePath)) {
+		if (VerifyInputValue.getInstance().isEmpty(filePath)) {
 			System.out.println(BaseMessageCnst.notFindParams);
 		}
 		;
@@ -85,9 +85,9 @@ public class PropertiesReader {
 	 * @param propertiesName プロパティファイル名
 	 * @return PropertiesReaderのインスタンス
 	 */
-	public static PropertiesReader getInstance(String propertiesFileName) {
+	public static ConfigReader getInstance(String propertiesFileName) {
 
-		return new PropertiesReader(propertiesFileName);
+		return new ConfigReader(propertiesFileName);
 
 	}
 
