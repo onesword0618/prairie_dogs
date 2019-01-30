@@ -4,6 +4,10 @@ public class MainProcess {
 
 	public static void main(String[] args) {
 
+		String csvFile = "test.csv";
+		
+		System.out.println(CsvReader.getInstance(csvFile));
+		
 		//LogPropertiesMaker lpm = new LogPropertiesMaker();
 		
 		//lpm.createMsg();
