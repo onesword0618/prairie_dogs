@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.Test;
 
-public class CoreTest {
+public class MainProcessTest {
 
 	@Test
 	public void 基幹クラスの呼び出し確認() {
@@ -13,7 +13,7 @@ public class CoreTest {
 		// 期待値
 		String expected = "Call Class OK";
 		// Exercise -実行
-		String actual = Core.getCall();
+		String actual = MainProcess.getCall();
 		// Verify -検証
 		assertThat(actual, is(expected));
 	}

@@ -1,5 +1,13 @@
 package jp.gushed;
 
+/**
+ * 共通メッセージのEnum定数クラス
+ * <p>
+ * 管理機能と記帳機能で共通として使用されるメッセージを格納する
+ * 
+ * @author onesword0618
+ *
+ */
 public enum GuideMessageCnst implements MessageInterface {
 
 	// 家計簿アプリケーションへようこそ
