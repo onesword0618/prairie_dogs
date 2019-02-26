@@ -10,32 +10,30 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * <h1>CSV読込</h1>
- * <p>
- * <h2>目的：外部リソース(CSVファイル)の読込</h2><br>
- * <p>
- * 指定されたファイル名を読込、中身を取得する<br>
- * <p>
+ * CSVファイル読込<br>
+ * 
+ * 外部リソース(*.csv)の読込処理の責務を負う<br>
+ * 指定したリソースのパスを読込、その中身を取得する<br>
+ * 指定したリソース、パスに不備があるときは例外を送出する<br>
  * 
  * @author onesword0618
+ * @version 0.0.1
  *
  */
 public class CsvReader {
 
 	/**
-	 * <h2>CSVファイルの読込処理<h2>
-	 * <p>
+	 * CSVファイルの読込処理<br>
+	 * 
+	 * CsvReaderのインスタンス<br>
 	 * 引数で渡されたCSVファイルを元に読込処理を実行する<br>
-	 * <p>
 	 * 
 	 * @param csvFileName CSVファイル名
-	 * @exception IOException 引数のCSVファイル名に不備があった場合、入出力エラー
+	 * @exception IOException 引数のCSVファイル名に不備があった場合
 	 */
 	private CsvReader(String csvFileName) {
-
 		// 引数で渡したファイル名でファイルパスを探す
 		String filePath = CsvReader.class.getClassLoader().getResource(csvFileName).getPath();
-		
 		try {
 			loadCsv(filePath);
 		} catch (IOException e) {
@@ -45,20 +43,19 @@ public class CsvReader {
 	}
 
 	/**
-	 * <h2>CSVファイルの読込実行</h2>
-	 * <p>
-	 * @param filePath ファイル名
+	 * CSVファイルの読込処理実行<br>
+	 * 
+	 * @param filePath ファイルパス
 	 * @throws IOException
 	 */
 	private static void loadCsv(String filePath) throws IOException {
-		if(
-		VerifyInputValue.getInstance().isEmpty(filePath)) {
+		if(VerifyInputValue.getInstance().isEmpty(filePath)) {
 			System.out.println(BaseMessageCnst.notFindParams);
 		};
 
 		// ストリーム形式で読込処理を行う
-		try (Stream<String> lines = Files.lines(Paths.get(filePath))) {
-			List<List<String>> values = lines.map(line -> Arrays.asList(line.split(","))).collect(Collectors.toList());
+		try (Stream<String> Csvlines = Files.lines(Paths.get(filePath))) {
+			List<List<String>> values = Csvlines.map(line -> Arrays.asList(line.split(","))).collect(Collectors.toList());
 			System.out.println(Arrays.toString(values.toArray()));
 
 			List<String> names = new ArrayList<String>();
@@ -80,11 +77,11 @@ public class CsvReader {
 	}
 
 	/**
-	 * <h2>CsvReaderのインスタンス生成</h2><br>
-	 * <p>
+	 * CsvReaderのインスタンス生成<br>
+	 * 当クラスのインスタンスを取得する際に呼び出す<p>
 	 * 
 	 * @param value
-	 * @return
+	 * @return 生成したインスタンス
 	 */
 	public static CsvReader getInstance(String value) {
 

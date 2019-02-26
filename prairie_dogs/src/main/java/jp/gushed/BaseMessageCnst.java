@@ -9,13 +9,19 @@ package jp.gushed;
  *
  */
 public enum BaseMessageCnst implements MessageInterface{
-	// パラメタの値がありません
+	/**
+	 * パラメタの値がありません
+	 */
 	notFindParams("パラメタの値がありません")
 
-	// 正しい拡張子のファイル名ではありません
+	/**
+	 * 正しい拡張子のファイル名ではありません
+	 */
 	, notCorrectTypeFile("正しい拡張子のファイルではありません")
 
-	// 対象のリソースファイルは読み込むことができません
+	/**
+	 * 対象のリソースファイルは読み込むことができません
+	 */
 	, canNotReadTargetResourceFiles("対象のリソースファイルは読み込むことができません");
 
 	private final String msg;
