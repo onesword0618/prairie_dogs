@@ -1,5 +1,12 @@
 package jp.gushed;
 
+/**
+ * <h1>メインクラス</h1><br>
+ * <p>
+ * @version 0.0.1
+ * @author onesword0618
+ *
+ */
 public class MainProcess {
 
 	public static void main(String[] args) {

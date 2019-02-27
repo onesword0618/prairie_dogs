@@ -1,12 +1,13 @@
 package jp.gushed;
 
 /**
- * 基底のメッセージクラス<br>
+ * <h1>基底メッセージ</h1><br>
  * <p>
- * システムを運用する上で必要なメッセージのEnum定数クラス
+ * システムを運用する上で必要なメッセージのEnum定数クラス<br>
  * 
+ * @version 0.0.1
  * @author onesword0618
- *
+ * 
  */
 public enum BaseMessageCnst implements MessageInterface{
 	/**

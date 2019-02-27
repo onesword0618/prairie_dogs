@@ -10,15 +10,15 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * CSVファイル読込<br>
- * 
+ * <h1>CSVファイル読込</h1><br>
+ * <p>
  * 外部リソース(*.csv)の読込処理の責務を負う<br>
  * 指定したリソースのパスを読込、その中身を取得する<br>
  * 指定したリソース、パスに不備があるときは例外を送出する<br>
  * 
- * @author onesword0618
  * @version 0.0.1
- *
+ * @author onesword0618
+ * 
  */
 public class CsvReader {
 
@@ -49,7 +49,7 @@ public class CsvReader {
 	 * @throws IOException
 	 */
 	private static void loadCsv(String filePath) throws IOException {
-		if(VerifyInputValue.getInstance().isEmpty(filePath)) {
+		if(InputValueFormat.getInstance().isEmpty(filePath)) {
 			System.out.println(BaseMessageCnst.notFindParams);
 		};
 
@@ -87,4 +87,23 @@ public class CsvReader {
 
 		return new CsvReader(value);
 	}
+	
+	/**
+	 * Csvレコードの読み出し<br>
+	 * 指定したリソースのファイルの中身をListの形式で保持する
+	 * 
+	 * @return
+	 */
+	public List<String> readCsvFile() {
+		
+		// TODO CSVファイルの形式チェック
+		// TODO 中身の有無チェック
+		// TODO カンマ確認
+		// TODO 特殊文字の確認
+		// Listに紐付ける　データをDTO形式にしてそれをリストで補遺する
+		
+		return null;
+		
+	}
+	
 }

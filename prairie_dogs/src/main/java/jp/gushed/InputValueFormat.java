@@ -3,19 +3,18 @@ package jp.gushed;
 import java.nio.file.Path;
 
 /**
- * 入力値不整合確認
+ * <h1>入力値形式検査</h1><br>
  * <p>
- * 入力値についての不整合確認処理で扱う処理を集めたクラス<br>
- * <p>
+ * 入力値についての形式、妥当性、必須項目の確認処理を集めたクラス<br>
  * 
+ * @version 0.0.1
  * @author onesword0618
  *
  */
-public class VerifyInputValue {
+public class InputValueFormat {
 
-	
-	public static VerifyInputValue getInstance() {
-		return new VerifyInputValue();
+	public static InputValueFormat getInstance() {
+		return new InputValueFormat();
 	}
 	
 	/**
