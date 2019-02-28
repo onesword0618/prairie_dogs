@@ -7,6 +7,13 @@ import java.nio.charset.StandardCharsets;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
+/**
+ * ログファイル出力
+ * 
+ * @version 0.0.1
+ * @author onesword0618
+ *
+ */
 public class LogPropertiesMaker {
 
 	protected static final String LOGGING_PROPERTIES_DATA = "handlers=java.util.logging.ConsoleHandler\n"
